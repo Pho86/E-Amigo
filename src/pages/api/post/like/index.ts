@@ -12,6 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     return
   };
   const prismaUser = await prisma.user.findUnique({
+    // @ts-ignore
     where: { email: session.user!.email },
   })
   if (!prismaUser) {

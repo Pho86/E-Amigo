@@ -13,12 +13,12 @@ datasource db {
 // Define the `Post` table in the database
 
 model Post {
-  id            Int   @id @default(sequence())
+  id            Int       @id @default(sequence())
   title         String
   content       String
   userID        String
   tags          String[]
-  game          String?
+  game          String
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   user          User      @relation(fields: [userID], references: [id])
@@ -57,11 +57,12 @@ model Session {
 }
 
 model User {
-  id            String   @id @default(cuid())
+  id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  discord       String?
   accounts      Account[]
   sessions      Session[]
   posts         Post[]
@@ -78,7 +79,7 @@ model VerificationToken {
 }
 
 model Comment {
-  id        Int   @id @default(sequence())
+  id        Int      @id @default(sequence())
   content   String   @db.String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -89,7 +90,7 @@ model Comment {
 }
 
 model Like {
-  id        Int   @id @default(sequence())
+  id        Int      @id @default(sequence())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   userId    String

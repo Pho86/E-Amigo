@@ -12,12 +12,33 @@ export default function NavBar({
    onSignOut: () => void
 }) {
    return (
-      <nav className="fixed top-0 w-screen bg-red-50 p-4 flex justify-between items-center">
+      <nav className="fixed top-0 w-screen bg-indigo-800 text-zinc-50 px-6 py-4 flex justify-between items-center">
          <div>
-            <Link href="/">
+            <Link href="/" className="font-bold text-2xl">
                <h1>E-Amigo</h1>
             </Link>
          </div>
+         <Link href="/createpost">
+            {user ?
+               <Image
+                  className="h-8 w-8 rounded-full"
+                  src={user?.image}
+                  width={50}
+                  height={50}
+                  quality={100}
+                  alt="user image"
+               />
+               :
+               <Image
+                  className="h-8 w-8 rounded-full"
+                  src={user?.image}
+                  width={50}
+                  height={50}
+                  quality={100}
+                  alt="user image"
+               />
+            }
+         </Link>
          <Link href="/profile">
             {user ?
                <Image

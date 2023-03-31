@@ -13,13 +13,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return
    };
    const prismaUser = await prisma.user.findUnique({
+      // @ts-ignore
       where: { email: session.user!.email },
    })
    if (!prismaUser) {
       res.status(401).json({ error: 'Unauthorized' })
       return
    }
-   let { id, content, title } = req.body.post
+   let { id, content, title, game, tags } = req.body.post
    switch (method) {
       case 'POST':
          const post = await prisma.post.create({
@@ -27,6 +28,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                title,
                content,
                userID: prismaUser.id,
+               // @ts-ignore
+               game,
+               tags
             },
          })
          res.status(201).json(post)

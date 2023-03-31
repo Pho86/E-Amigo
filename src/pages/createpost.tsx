@@ -2,11 +2,13 @@ import axios from "axios"
 import { useState } from "react"
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-export default function Post() {
+export default function CreatePost() {
     const { data: session } = useSession();
     const [post, setPost] = useState({
         title: "",
         content: "",
+        game: "",
+        tags: [""]
     })
     const [disabled, setDisabled] = useState(false)
     const handleChange = (event: any) => {
@@ -26,31 +28,47 @@ export default function Post() {
     }
     return (
         <>
-            <main className="mt-16">
-                <form onSubmit={handleSubmit} onChange={handleChange}>
-                    <fieldset disabled={disabled}>
+            <main className="mt-20 w-full flex flex-col justify-between items-center">
+                <form onSubmit={handleSubmit} onChange={handleChange} className="w-1/2">
+                    <fieldset disabled={disabled} className="flex flex-col gap-3">
                         <div className='flex gap-2 justify-center flex-col'>
                             <label htmlFor="title">title</label>
                             <input
                                 type="title"
                                 name="title"
                                 required
-                                placeholder="title"
+                                placeholder="Need a duo."
+                                value={post.title}
                                 className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary'
+                                onChange={() => { }}
                             />
                         </div>
                         <div className='flex gap-2 justify-center flex-col'>
-                            <label htmlFor="content">content</label>
+                            <label htmlFor="game">game</label>
+                            <input
+                                type="game"
+                                name="game"
+                                required
+                                placeholder="VALORANT, League of Legends, Other..."
+                                value={post.game}
+                                className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary'
+                                onChange={() => { }}
+                            />
+                        </div>
+                        <div className='flex gap-2 justify-center flex-col'>
+                            <label htmlFor="content">description</label>
                             <textarea
                                 className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary'
-                                name="content"
+                                name="Enter description"
                                 required
-                                placeholder="content"
+                                value={post.content}
+                                placeholder="need a 5th contact me at joe#1234"
                                 rows={5}
+                                onChange={() => { }}
                             ></textarea>
                         </div>
                         <div className='flex justify-center items-center my-4'>
-                            <button type="submit" >SUBMIT</button>
+                            <Button type="submit">SUBMIT</Button>
                         </div>
                     </fieldset>
                 </form>
@@ -61,6 +79,7 @@ export default function Post() {
 import { getServerSession } from "next-auth";
 import { GetServerSidePropsContext } from "next"
 import { authOptions } from './api/auth/[...nextauth]';
+import Button from "@/components/Button";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const session = await getServerSession(context.req, context.res, authOptions);
 
