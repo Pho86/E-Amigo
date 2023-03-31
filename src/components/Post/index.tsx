@@ -2,13 +2,25 @@ import Image from "next/image"
 import Link from "next/link"
 import formatTimeAgo from "utils/formatTimeAgo"
 import { FaCommentDots } from "react-icons/fa"
+
+export interface postProps {
+   id: number,
+   title: string,
+   game: string,
+   content: string,
+   createdAt: string,
+   totalComments: number,
+   user: any,
+   updatedAt: string,
+}
+
 export default function Post({
    post
 }: {
-   post: any
+   post: postProps
 }) {
    return (
-      <div className="flex flex-col w-6/12 p-4 bg-primarybg text-slate-50 rounded-xl transition-all duration-150 drop-shadow-small hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]">
+      <div className="flex flex-col p-4 bg-primarybg text-slate-50 rounded-xl transition-all duration-150 drop-shadow-small hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]">
          <Link href={`/post/${post.id}`}>
             <div className="flex justify-between">
                <div className="flex">
@@ -25,12 +37,11 @@ export default function Post({
                   </div>
                </div>
                <div className="flex flex-col gap-1 items-end">
-                  <p>{formatTimeAgo(post.createdAt)}</p>
-                  <p className="flex gap-1"><FaCommentDots/> {post.totalComments}</p>
+                  <p className="whitespace-nowrap">{formatTimeAgo(post.createdAt)} </p>
+                  <p>{post.game}</p>
+                  <p className="flex gap-1"><FaCommentDots /> {post.totalComments}</p>
                </div>
             </div>
-            <hr className="my-2 p-[.5px] bg-indigo-900" />
-            <p>{post.game}</p>
             <hr className="my-2 p-[.5px] bg-indigo-900" />
             <p>{post.content}</p>
          </Link>

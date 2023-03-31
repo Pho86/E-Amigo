@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
    }
    let { id, content } = req.body.comment
    let postId = Number(req.body.postId)
-   console.log(req.body)
+   console.log(req.body.comment.content)
    switch (method) {
       case 'POST':
          const comment = await prisma.comment.create({
@@ -60,6 +60,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             where: {
                id: id
             },
+         })
+         const updateDeletePostComments = await prisma.post.update({
+            where: {
+               id: Number(req.body.comment.postId),
+            },
+            data: {
+               totalComments: { decrement: 1 }
+            }
          })
          res.status(200).json(deleteComment)
          break;

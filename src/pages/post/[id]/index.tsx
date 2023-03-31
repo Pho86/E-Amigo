@@ -30,11 +30,30 @@ export default function Post({
          setDisabled(true)
          const req = await axios.post('/api/post/comment', { comment, postId: id });
          setComments([req.data, ...comments])
+         setComment({ content: "" });
+         post.totalComments += 1
          setDisabled(false)
       }
       catch (error) {
          console.log(error)
       }
+   }
+   const handleDelete = async (e: React.MouseEvent<HTMLElement>) => {
+      try {
+         const req = await axios.delete('/api/post', { data: { post } });
+         await router.push('/')
+      }
+      catch (error) {
+         console.log(error)
+      }
+   }
+   const deleteComment = async (commentEvent: any) => {
+      let newComments = await comments.filter((comment: any, i: number) => {
+         if (comment.id != commentEvent.id) {
+            return comment
+         }
+      })
+      setComments(newComments)
    }
    const handleLike = async (e: React.MouseEvent<HTMLElement>) => {
       const req = await axios.post('/api/post/like', { postId: id });
@@ -61,6 +80,16 @@ export default function Post({
                <div className="flex flex-col items-end justify-between gap-1 h-auto p-2">
                   <p>{formatTimeAgo(post.createdAt)}</p>
                   {post.user.id === user.id && <FaEllipsisV onClick={() => { setExpand(!expand) }} />}
+                  {expand &&
+                     <div className="flex flex-col absolute p-2 border rounded bg-bg -translate-y-8">
+                        <ul>
+                           <Link href={`/post/${id}/edit`}>
+                              <li className="cursor-pointer hover:bg-indigo-900 p-1">Edit Post</li>
+                           </Link>
+                           <li className="cursor-pointer hover:bg-indigo-900 p-1" onClick={handleDelete}>Delete Post</li>
+                        </ul>
+                     </div>
+                  }
                </div>
             </div>
             <hr className="my-2 p-[.5px] bg-indigo-900" />
@@ -82,7 +111,9 @@ export default function Post({
                         className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary'
                         name="content"
                         required
-                        placeholder="content"
+                        placeholder="hi i msged you on discord"
+                        value={comment.content}
+                        onChange={() => { }}
                         rows={5}
                      ></textarea>
                   </div>
@@ -113,9 +144,11 @@ export default function Post({
                      </div>
                   </fieldset>
                </form>}
-            {comments?.map((comment: any) => (
-               <Comment comment={comment} key={comment.id} />
-            ))}
+            <div className="flex flex-col gap-10">
+               {comments?.map((comment: any) => (
+                  <Comment comment={comment} key={comment.id} onChange={(e: any) => { deleteComment(e); post.totalComments -= 1 }} owner={comment.user.id === user.id} />
+               ))}
+            </div>
          </div>
       </div>
    )
@@ -126,6 +159,7 @@ import Button from "@/components/Button"
 import Comment from "@/components/Comment"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
+import Link from "next/link"
 export async function getServerSideProps(context: any) {
    const { id } = context.query
    const prismapost = await prisma.post.findFirstOrThrow({

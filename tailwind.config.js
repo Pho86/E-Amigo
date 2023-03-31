@@ -24,6 +24,9 @@ module.exports = {
           '8px 6px 0 rgba(75, 212, 250, 1)',
           '6px 6px 0 rgba(0, 0, 0, 1)',
         ]
+      },
+      gridTemplateColumns:{
+        'home': 'repeat(auto-fit, minmax(350px,3fr));'
       }
     },
   },

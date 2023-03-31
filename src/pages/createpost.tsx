@@ -13,6 +13,7 @@ export default function CreatePost() {
     const [disabled, setDisabled] = useState(false)
     const handleChange = (event: any) => {
         setPost({ ...post, [event.target.name]: event.target.value });
+        console.log(post)
     };
     const router = useRouter();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,8 +59,8 @@ export default function CreatePost() {
                         <div className='flex gap-2 justify-center flex-col'>
                             <label htmlFor="content">description</label>
                             <textarea
-                                className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary'
-                                name="Enter description"
+                                className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary whitespace-pre-wrap'
+                                name="content"
                                 required
                                 value={post.content}
                                 placeholder="need a 5th contact me at joe#1234"

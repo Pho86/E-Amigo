@@ -23,7 +23,8 @@ export default function Post({
       e.preventDefault()
       try {
          setDisabled(true)
-         const req = await axios.put('/api/post', { post });
+         console.log(post)
+         const req = await axios.put('/api/post/', { post });
          router.push('/')
       }
       catch (error) {
@@ -32,8 +33,8 @@ export default function Post({
    }
    return (
       <div className="mt-20 w-full flex flex-col justify-between items-center">
-         <form onSubmit={handleSubmit} onChange={handleChange} className="w-1/2">
-            <fieldset disabled={disabled}>
+         <form onSubmit={handleSubmit} onChange={handleChange} className="w-1/2 ">
+            <fieldset disabled={disabled} className="flex flex-col gap-2"> 
                <div className='flex gap-2 justify-center flex-col'>
                   <label htmlFor="title">title</label>
                   <input

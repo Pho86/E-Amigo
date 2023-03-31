@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link";
 import { getServerSession } from 'next-auth';
-
+import { FaPlusCircle } from "react-icons/fa";
 export default function NavBar({
    user,
    onSignIn,
@@ -18,26 +18,8 @@ export default function NavBar({
                <h1>E-Amigo</h1>
             </Link>
          </div>
-         <Link href="/createpost">
-            {user ?
-               <Image
-                  className="h-8 w-8 rounded-full"
-                  src={user?.image}
-                  width={50}
-                  height={50}
-                  quality={100}
-                  alt="user image"
-               />
-               :
-               <Image
-                  className="h-8 w-8 rounded-full"
-                  src={user?.image}
-                  width={50}
-                  height={50}
-                  quality={100}
-                  alt="user image"
-               />
-            }
+         <Link href="/createpost" className="hover:scale-125 transition-all">
+            <FaPlusCircle size={30}/>
          </Link>
          <Link href="/profile">
             {user ?

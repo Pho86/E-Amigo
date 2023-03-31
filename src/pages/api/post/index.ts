@@ -23,6 +23,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
    let { id, content, title, game, tags } = req.body.post
    switch (method) {
       case 'POST':
+         console.log(req.body.post)
+         console.log(req.body.post.content.toString())
          const post = await prisma.post.create({
             data: {
                title,
@@ -35,19 +37,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
          })
          res.status(201).json(post)
          break
-      case 'PUT':
-         const updatePost = await prisma.post.update({
+         case 'PUT':
+            const updatePost = await prisma.post.update({
             where: {
                id: id,
             },
             data: {
                title,
                content,
+               // @ts-ignore
+               game
             },
          })
          res.status(201).json(updatePost)
          break
       case 'DELETE':
+         const deleteComments = await prisma.comment.deleteMany({
+            where: {
+               postId: id
+            }
+         })
          const deletePost = await prisma.post.delete({
             where: {
                id: id

@@ -11,14 +11,16 @@ export default function Home({
 }) {
     return (
         <>
-            <main className="mt-24 flex-col flex justify-center w-full items-center gap-5">
+            <main className="mt-24 flex-col flex justify-center w-full items-center p-10 gap-5">
                 <div>
                     
                 </div>
-                <h1>Recent Posts</h1>
+                <h2 className="font-bold text-xl self-start">Recent Posts</h2>
+                <div className="grid grid-flow-row gap-6 w-full grid-cols-home">
                 {posts && posts.map((post: any, i: number) => (
                     <Post post={post} key={i}/>
                 ))}
+                </div>
             </main>
         </>
     )
