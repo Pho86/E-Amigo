@@ -18,7 +18,7 @@ module.exports = {
       },
       dropShadow: {
         'primary': '5px 5px 0 rgba(122, 84, 231, 1)',
-        'primary-sm': '0px 0px 0 rgba(122, 84, 231, 1)' ,
+        'primary-sm': '2px 2px 0 rgba(122, 84, 231, 1)' ,
         'primary-lg': '8px 8px 0 rgba(75, 212, 250, 1)',
         'primary-special': [
           '8px 6px 0 rgba(75, 212, 250, 1)',

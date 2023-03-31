@@ -92,7 +92,6 @@ export async function getServerSideProps(context: any) {
          user: true,
       }
    })
-   console.log(prismapost.user.id)
    return {
       props: {
          post: JSON.parse(JSON.stringify(prismapost)),

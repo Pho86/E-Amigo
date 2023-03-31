@@ -3,16 +3,20 @@ import React, { useState } from "react"
 import axios from "axios"
 import { useRouter } from "next/router"
 import formatTimeAgo from "utils/formatTimeAgo"
-import { FaCommentDots, FaEllipsisV } from "react-icons/fa"
+import { FaCommentDots, FaEllipsisV, FaHeart } from "react-icons/fa"
 
 export default function Post({
    post,
    comments: initialcomments,
-   user
+   user,
+   liked: initialLiked,
+   active
 }: {
    post: any,
    comments: any,
-   user: any
+   user: any,
+   liked: any,
+   active: boolean
 }) {
    const [comment, setComment] = useState({
       content: "",
@@ -55,30 +59,53 @@ export default function Post({
       })
       setComments(newComments)
    }
-   const handleLike = async (e: React.MouseEvent<HTMLElement>) => {
-      const req = await axios.post('/api/post/like', { postId: id });
+   const handleLike = async (active: boolean) => {
+      if (active) {
+         const req = await axios.post('/api/post/like', { postId: id });
+         setLikes(Number(likes + 1))
+         setCanLike(true)
+      } else {
+         const req = await axios.delete('/api/post/like', { data: { postId: id } });
+         setLikes(Number(likes - 1))
+         setCanLike(false)
+      }
    }
-
+   const [likes, setLikes] = useState(post.totalLikes)
+   const [liked, setLiked] = useState(initialLiked)
+   const [canLike, setCanLike] = useState(active)
+   console.log(liked)
    const [expand, setExpand] = useState(false)
    return (
-      <div className="flex flex-col mt-20 gap-5 justify-between items-center">
+      <div className="flex flex-col mt-16 p-10 gap-5 justify-between items-center">
          <div className="w-1/2">
             <div className="flex justify-between">
                <div className="flex">
-                  <Image
-                     className="h-20 w-20 rounded"
-                     src={post.user.image}
-                     width={150}
-                     height={150}
-                     alt={`${post.user.name} profile picture`}
-                  />
-                  <div className="flex flex-col p-2 h-full justify-between">
-                     <h2 className="">{post.user?.name}</h2>
-                     <h1 className="font-bold text-xl">{post.title}</h1>
-                  </div>
+                  <Link href={`/profile/${post.user.id}`} className="flex">
+                     <Image
+                        className="h-20 w-20 rounded transition-all hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]"
+                        src={post.user.image}
+                        width={150}
+                        height={150}
+                        alt={`${post.user.name} profile picture`}
+                     />
+                     <div className="flex flex-col p-2 h-full justify-between">
+                        <h2 className="">{post.user?.name}</h2>
+                        <h1 className="font-bold text-xl">{post.title}</h1>
+                     </div>
+                  </Link>
                </div>
                <div className="flex flex-col items-end justify-between gap-1 h-auto p-2">
                   <p>{formatTimeAgo(post.createdAt)}</p>
+
+                  {canLike ? <div onClick={() => {handleLike(false)}} className="flex cursor-pointer gap-1">
+                     <FaHeart />
+                     <p>{likes}</p>
+                  </div> : <div onClick={() => {handleLike(true)}} className="flex cursor-pointer gap-1">
+                     <FaHeart />
+                     <p>{likes}</p>
+                  </div>
+                  }
+
                   {post.user.id === user.id && <FaEllipsisV onClick={() => { setExpand(!expand) }} />}
                   {expand &&
                      <div className="flex flex-col absolute p-2 border rounded bg-bg -translate-y-8">
@@ -93,7 +120,7 @@ export default function Post({
                </div>
             </div>
             <hr className="my-2 p-[.5px] bg-indigo-900" />
-            <p>{post.game}</p>
+            <p className="p-1 m-1 rounded bg-primary">{post.game}</p>
             <hr className="my-2 p-[.5px] bg-indigo-900" />
             <p>{post.content}</p>
          </div>
@@ -183,20 +210,34 @@ export async function getServerSideProps(context: any) {
       }
    })
    let user;
+   let liked;
+   let active;
    const session = await getServerSession(context.req, context.res, authOptions);
    if (session) {
       user = await prisma.user.findUnique({
          // @ts-ignore
          where: { email: session.user!.email },
       })
+      liked = await prisma.like.findMany({
+         where: {
+            postId: Number(id),
+            userId: user!.id
+         }
+      })
+      if (liked.length > 0) active = true
+      else active = false
    } else {
       user = {};
+      active = false
    }
+   console.log(active)
    return {
       props: {
          post: JSON.parse(JSON.stringify(prismapost)),
          comments: JSON.parse(JSON.stringify(comments)),
-         user: JSON.parse(JSON.stringify(user))
+         user: JSON.parse(JSON.stringify(user)),
+         liked: JSON.parse(JSON.stringify(liked)),
+         active
       }
    }
 }

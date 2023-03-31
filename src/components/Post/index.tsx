@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import formatTimeAgo from "utils/formatTimeAgo"
-import { FaCommentDots } from "react-icons/fa"
+import { FaCommentDots, FaHeart } from "react-icons/fa"
 
 export interface postProps {
    id: number,
@@ -10,6 +10,7 @@ export interface postProps {
    content: string,
    createdAt: string,
    totalComments: number,
+   totalLikes: number,
    user: any,
    updatedAt: string,
 }
@@ -38,11 +39,14 @@ export default function Post({
                </div>
                <div className="flex flex-col gap-1 items-end">
                   <p className="whitespace-nowrap">{formatTimeAgo(post.createdAt)} </p>
-                  <p>{post.game}</p>
-                  <p className="flex gap-1"><FaCommentDots /> {post.totalComments}</p>
+                  <p className="p-1 m-1 rounded bg-primary">{post.game}</p>
+                  <div className="flex gap-4">
+                     <p className="flex gap-1"><FaHeart /> {post.totalLikes}</p>
+                     <p className="flex gap-1"><FaCommentDots /> {post.totalComments}</p>
+                  </div>
                </div>
             </div>
-            <hr className="my-2 p-[.5px] bg-indigo-900" />
+            <hr className="my-3 border-1 border-primary" />
             <p>{post.content}</p>
          </Link>
       </div>

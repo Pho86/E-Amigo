@@ -5,6 +5,7 @@ import EllipseMenu from "../Menu";
 import axios from "axios";
 import { postProps } from "../Post";
 import Button from "../Button";
+import Link from "next/link";
 export interface commentProps {
    id: number,
    createdAt: string,
@@ -51,14 +52,16 @@ export default function Comment({
       <div className="flex flex-col">
          <div className="flex items-center w-full justify-between">
             <div className="flex">
+               <Link href={`/profile/${comment.user.id}`} className="flex">
                <Image
-                  className="h-12 w-12 rounded-full"
+                  className="h-12 w-12 rounded transition-all hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]"
                   src={comment.user.image}
                   width={50}
                   height={50}
-                  alt=""
-               />
+                  alt="comment user image"
+                  />
                <h3 className="p-2 font-semibold text-lg">{comment.user.name}</h3>
+                  </Link>
             </div>
             <div className="flex flex-col items-end gap-2">
 

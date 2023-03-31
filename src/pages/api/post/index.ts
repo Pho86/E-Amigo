@@ -23,8 +23,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
    let { id, content, title, game, tags } = req.body.post
    switch (method) {
       case 'POST':
-         console.log(req.body.post)
-         console.log(req.body.post.content.toString())
          const post = await prisma.post.create({
             data: {
                title,

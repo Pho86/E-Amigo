@@ -37,8 +37,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           user: true,
         },
       })
+      const updatePostLikes = await prisma.post.update({
+        where: {
+          id: postId,
+        },
+        data: {
+          totalLikes: { increment: 1 }
+        }
+      })
       res.status(201).json(IncrementLike);
       break
+    case 'DELETE':
+      console.log(req.body.postId)
+      const deleteLike = await prisma.like.deleteMany({
+        where: {
+          postId: postId,
+          userId: prismaUser.id
+        },
+      })
+      const update = await prisma.post.update({
+        where: {
+          id: postId,
+        },
+        data: {
+          totalLikes: { decrement: 1 }
+        }
+      })
+      res.status(200).json(deleteLike)
+      break;
     default:
       res.setHeader('Allow', ['POST'])
       res.status(405).end(`Method ${method} Not Allowed`)
