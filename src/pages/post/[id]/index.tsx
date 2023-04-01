@@ -71,10 +71,9 @@ export default function Post({
       }
    }
    const [likes, setLikes] = useState(post.totalLikes)
-   const [liked, setLiked] = useState(initialLiked)
    const [canLike, setCanLike] = useState(active)
    const [expand, setExpand] = useState(false)
-   
+
    return (
       <div className="flex flex-col mt-16 p-10 gap-5 justify-between items-center">
          <div className="w-full md:w-1/2">
@@ -119,9 +118,9 @@ export default function Post({
                   }
                </div>
             </div>
-            <hr className="my-2 p-[.5px] bg-indigo-900" />
+            <hr className="my-2 mx-1 border-indigo-300" />
             <p className="p-1 m-1 rounded bg-primary">{post.game}</p>
-            <hr className="my-2 p-[.5px] bg-indigo-900" />
+            <hr className="my-2 mx-1 border-indigo-300" />
             <p>{post.content}</p>
          </div>
          <div className="w-full md:w-1/2 flex flex-col gap-5">

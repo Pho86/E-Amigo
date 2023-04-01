@@ -24,7 +24,6 @@ export default function Comment({
    owner: boolean
 }) {
    const [disabled, setDisabled] = useState(false)
-
    const [edit, setEdit] = useState(false)
    const [editedComment, setEditedComment] = useState(comment)
    const [activeComment, setActiveComment] = useState(comment)

@@ -13,6 +13,7 @@ export interface postProps {
    totalLikes: number,
    user: any,
    updatedAt: string,
+   map: (children : any) => React.ReactNode | JSX.Element
 }
 
 export default function Post({

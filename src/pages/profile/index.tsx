@@ -5,9 +5,12 @@ import { getServerSession } from 'next-auth';
 import Post from '@/components/Post';
 import { useState } from 'react';
 import axios from 'axios';
-import { FaEdit } from 'react-icons/fa';
+import { FaEdit, FaEnvelope } from 'react-icons/fa';
+import { postProps } from '@/components/Post';
+import {m, AnimatePresence} from "framer-motion"
+import { FaDiscord } from 'react-icons/fa';
 export default function Profile({ userPosts, prismaUser }: {
-   userPosts: any
+   userPosts: postProps
    prismaUser: any
 }) {
    const [discord, setDiscord] = useState(prismaUser.discord)
@@ -33,29 +36,31 @@ export default function Profile({ userPosts, prismaUser }: {
       return <main className='flex flex-col justify-between w-full mt-16 items-center gap-5 p-10'>
          <div className='flex self-start justify-between w-full'>
             <div className='flex w-5/12'>
+               {/* @ts-ignore */}
                <Image src={session.user.image} width={250} height={250} className="rounded-lg" alt={`profile picture for ${session.user.name}`} />
                <div className='flex flex-col gap-2 px-4 justify-between w-full'>
+                  {/* @ts-ignore */}
                   <h1 className='font-bold text-xl'>{session && session.user.name}</h1>
-                  <p> {session.user.email}</p>
-                  <p className='flex justify-between gap-2'> {oldDiscord ? oldDiscord : "no discord"} <FaEdit onClick={() => { setEdit(!edit) }} className="hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all hover:scale-110 cur"/></p>
-                  {edit && <form onChange={handleChange} onSubmit={handleSubmit} className="">
-                     <fieldset className='flex gap-2'>
-                        <input value={discord.discord} placeholder="discord tag" className='p-2 rounded text-black border-x-[3px] outline-primary border-primary' onChange={() => { }} />
-                        <Button type="submit" className='w-full'>Submit</Button>
-                     </fieldset>
-                  </form>}
+                  {/* @ts-ignore */}
+                  <p className='flex gap-2'> <FaEnvelope/> {session.user.email}</p>
+                  <div>
+                     <p className='flex justify-between gap-2'><span className='flex gap-2 items-center'> <FaDiscord/>{oldDiscord ? oldDiscord : "no discord"}</span> <FaEdit onClick={() => { setEdit(!edit) }} className="hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all hover:scale-110 cur" /></p>
+                     <AnimatePresence>
+                     {edit && <m.form onChange={handleChange} onSubmit={handleSubmit} className="absolute p-2 bg-primarybg rounded-b-xl" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
+                        <fieldset className='flex gap-2 flex-col md:flex-row'>
+                           <input value={discord.discord} placeholder="discord tag" className='p-2 rounded text-black border-x-[3px] outline-primary border-primary' onChange={() => { }} />
+                           <Button type="submit" className='w-full'>Submit</Button>
+                        </fieldset>
+                     </m.form>}
+                     </AnimatePresence>
+                  </div>
                   <Button onClick={() => { signOut() }}>Signout </Button>
                </div>
             </div>
-            {/* <div className='grid grid-cols-4'>
-               <div className='p-2 bg-primary text-white'>
-                  <p>hello</p>
-               </div>
-            </div> */}
          </div>
          <h2 className="font-bold text-xl self-start">Recent Posts</h2>
          <div className="grid grid-flow-row gap-6 w-full grid-cols-home">
-            {userPosts && userPosts.map((post: any, i: number) => (
+            {userPosts && userPosts.map((post: postProps, i: number) => (
                <Post post={post} key={i} />
             ))}
          </div>
