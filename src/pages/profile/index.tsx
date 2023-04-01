@@ -38,14 +38,14 @@ export default function Profile({ userPosts, prismaUser }: {
    const [edit, setEdit] = useState(false)
    const { data: session } = useSession();
    if (session) {
-      return <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-16'>
+      return <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-8 md:p-16'>
          <div className='flex self-start justify-between w-full'>
             <div className='flex w-5/12'>
                {/* @ts-ignore */}
-               <Image src={session.user.image} width={250} height={250} className="rounded-lg" alt={`profile picture for ${session.user.name}`} />
-               <div className='flex flex-col gap-2 px-4 justify-between w-full'>
+               <Image src={session.user.image} width={200} height={200} className="rounded-lg" alt={`profile picture for ${session.user.name}`} />
+               <div className='flex flex-col gap-6 px-4 w-full'>
                   {/* @ts-ignore */}
-                  <h1 className='font-bold text-xl'>{session && session.user.name}</h1>
+                  <h1 className='font-bold text-2xl'>{session && session.user.name}</h1>
                   {/* @ts-ignore */}
                   <p className='flex gap-2'> <FaEnvelope /> {session.user.email}</p>
                   <div>

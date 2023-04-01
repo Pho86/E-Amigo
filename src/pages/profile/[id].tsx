@@ -1,21 +1,23 @@
 import Image from 'next/image'
-import { useSession, signIn, signOut } from 'next-auth/react'
 import { authOptions } from '../api/auth/[...nextauth]';
 import { getServerSession } from 'next-auth';
 import Post from '@/components/Post';
 import Button from '@/components/Button';
+import { FaDiscord, FaCopy } from 'react-icons/fa';
+
 export default function Profile({ userPosts, prismaUser }: {
    userPosts: any
    prismaUser: any
 }) {
-
-   return <main className='flex flex-col justify-between w-full mt-16 items-center gap-5 p-10'>
+   const CopyDiscord = async () => {
+      navigator.clipboard.writeText(prismaUser.discord)
+   }
+   return <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-16'>
       <div className='flex self-start w-5/12'>
-         <Image src={prismaUser.image} width={150} height={150} className="rounded-lg" alt={`profile picture for ${prismaUser.name}`} />
-         <div className='flex flex-col p-2 justify-between'>
-            <h1 className='font-bold text-xl'>{prismaUser && prismaUser.name}</h1>
-            <p>{prismaUser.discord ? prismaUser.discord : "no discord"}</p>
-            <p> {prismaUser.email}</p>
+         <Image src={prismaUser.image} width={200} height={200} className="rounded-lg" alt={`profile picture for ${prismaUser.name}`} />
+         <div className='flex flex-col px-4 gap-6'>
+            <h1 className='font-bold text-2xl'>{prismaUser && prismaUser.name}</h1>
+            <p className='flex justify-between gap-6 cursor-pointer' onClick={CopyDiscord}><span className='flex gap-2 items-center'> <FaDiscord />{prismaUser.discord ? prismaUser.discord : "no discord"}</span> <FaCopy /></p>
          </div>
       </div>
       <h2 className="font-bold text-xl self-start">Recent Posts</h2>
