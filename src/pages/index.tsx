@@ -15,6 +15,10 @@ export default function Home({
 }) {
     return (
         <>
+            <Head>
+                <title>E-Amigo | Gaming With Friends</title>
+            </Head>
+
             <main className="mt-24 flex-col flex justify-center w-full items-center p-4 pt-8 sm:p-8 md:p-16 gap-5">
                 <div className="w-full grid grid-cols-1 max-h-[1000px] md:min-h-[600px] md:grid-cols-2">
                     <div className="pr-10 flex flex-col gap-6 h-1/2 justify-between">
@@ -75,6 +79,7 @@ export default function Home({
 
 import { prisma } from "server/db/client"
 import { FaPlusCircle } from "react-icons/fa";
+import Head from "next/head";
 export async function getServerSideProps() {
     const posts = await prisma?.post.findMany({
         orderBy: {
@@ -84,13 +89,14 @@ export async function getServerSideProps() {
             user: true,
         }
     })
-    const randomUsers = await prisma.user.findMany({
+    // const randomUsers = await prisma.user.findMany({
 
-    })
+    // })
+    // console.log(randomUsers)
     return {
         props: {
             posts: JSON.parse(JSON.stringify(posts)),
-            randomUsers: JSON.parse(JSON.stringify(randomUsers))
+            // randomUsers: JSON.parse(JSON.stringify(randomUsers))
         }
     }
 }

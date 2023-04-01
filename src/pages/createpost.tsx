@@ -28,6 +28,10 @@ export default function CreatePost() {
     }
     return (
         <>
+            <Head>
+                <title>Create A Post | E-Amigo</title>
+            </Head>
+
             <main className="mt-16 w-full flex flex-col justify-between items-center p-4 pt-8 sm:p-8 md:p-16">
                 <h1 className="font-bold text-2xl mb-4">Create A Posting</h1>
                 <form onSubmit={handleSubmit} onChange={handleChange} className="w-full md:w-8/12">
@@ -81,6 +85,7 @@ import { getServerSession } from "next-auth";
 import { GetServerSidePropsContext } from "next"
 import { authOptions } from './api/auth/[...nextauth]';
 import Button from "@/components/Button";
+import Head from "next/head";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const session = await getServerSession(context.req, context.res, authOptions);
 

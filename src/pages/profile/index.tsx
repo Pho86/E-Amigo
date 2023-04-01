@@ -39,38 +39,44 @@ export default function Profile({ userPosts, prismaUser }: {
    const [edit, setEdit] = useState(false)
    const { data: session } = useSession();
    if (session) {
-      return <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-4 pt-8 sm:p-8 md:p-16'>
-         <div className='flex self-start justify-between w-full'>
-            <div className='flex w-1/2'>
-               {/* @ts-ignore */}
-               <Image src={session.user.image} width={250} height={250} className="rounded-lg" alt={`profile picture for ${session.user.name}`} />
-               <div className='flex flex-col gap-6 px-4 w-full'>
+      return <>
+         <Head>
+            {/* @ts-ignore */}
+            <title>{session.user.name} Profile | E-Amigo</title>
+         </Head>
+         <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-4 pt-8 sm:p-8 md:p-16'>
+            <div className='flex self-start justify-between w-full'>
+               <div className='flex w-1/2'>
                   {/* @ts-ignore */}
-                  <h1 className='font-bold text-2xl'>{session && session.user.name}</h1>
-                  {/* @ts-ignore */}
-                  <p className='flex gap-1'> <FaEnvelope /> {session.user.email}</p>
-                  <div>
-                     <p className='flex justify-between gap-2'><span className='flex gap-2 items-center'> <FaDiscord />{oldDiscord ? oldDiscord : "no discord"}</span> <FaEdit onClick={() => { setEdit(!edit) }} className="cursor-pointer hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all hover:scale-110 cur" /></p>
-                     <AnimatePresence>
-                        {edit && <m.form onChange={handleChange} onSubmit={handleSubmit} className="absolute p-2 bg-primarybg rounded-b-xl z-50 w-48 md:w-4/12" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                           <fieldset className='flex gap-2 flex-col md:flex-row'>
-                              <input value={discord ? discord.discord : ""} placeholder="discord tag" className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary' onChange={() => { }} />
-                              <Button type="submit" className='w-full'>Submit</Button>
-                           </fieldset>
-                        </m.form>}
-                     </AnimatePresence>
+                  <Image src={session.user.image} width={250} height={250} className="rounded-lg" alt={`profile picture for ${session.user.name}`} />
+                  <div className='flex flex-col gap-6 px-4 w-full'>
+                     {/* @ts-ignore */}
+                     <h1 className='font-bold text-2xl'>{session && session.user.name}</h1>
+                     {/* @ts-ignore */}
+                     <p className='flex gap-1'> <FaEnvelope /> {session.user.email}</p>
+                     <div>
+                        <p className='flex justify-between gap-2'><span className='flex gap-2 items-center'> <FaDiscord />{oldDiscord ? oldDiscord : "no discord"}</span> <FaEdit onClick={() => { setEdit(!edit) }} className="cursor-pointer hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all hover:scale-110 cur" /></p>
+                        <AnimatePresence>
+                           {edit && <m.form onChange={handleChange} onSubmit={handleSubmit} className="absolute p-2 bg-primarybg rounded-b-xl z-50 w-48 md:w-4/12" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                              <fieldset className='flex gap-2 flex-col md:flex-row'>
+                                 <input value={discord ? discord.discord : ""} placeholder="discord tag" className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary' onChange={() => { }} />
+                                 <Button type="submit" className='w-full'>Submit</Button>
+                              </fieldset>
+                           </m.form>}
+                        </AnimatePresence>
+                     </div>
+                     <Button onClick={() => { signOut() }}>Signout </Button>
                   </div>
-                  <Button onClick={() => { signOut() }}>Signout </Button>
                </div>
             </div>
-         </div>
-         <h2 className="font-bold text-xl self-start">Recent Posts</h2>
-         <div className="grid grid-flow-row gap-6 w-full grid-cols-home">
-            {userPosts && userPosts.map((post: postProps, i: number) => (
-               <Post post={post} key={i} />
-            ))}
-         </div>
-      </main>
+            <h2 className="font-bold text-xl self-start">Recent Posts</h2>
+            <div className="grid grid-flow-row gap-6 w-full grid-cols-home">
+               {userPosts && userPosts.map((post: postProps, i: number) => (
+                  <Post post={post} key={i} />
+               ))}
+            </div>
+         </main>
+      </>
    }
    else {
       return (
@@ -86,6 +92,7 @@ export default function Profile({ userPosts, prismaUser }: {
 import { GetServerSidePropsContext } from "next"
 import Button from '@/components/Button';
 import { prisma } from 'server/db/client';
+import Head from 'next/head';
 export async function getServerSideProps(context: GetServerSidePropsContext) {
    const session = await getServerSession(context.req, context.res, authOptions);
    if (!session) {

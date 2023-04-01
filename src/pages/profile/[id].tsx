@@ -11,35 +11,41 @@ export default function Profile({ userPosts, prismaUser }: {
 }) {
    const [copied, setCopied] = useState(false)
    const CopyDiscord = async () => {
-      setCopied(true)
       navigator.clipboard.writeText(prismaUser.discord)
-      setTimeout(()=>{
-         
+      setCopied(true)
+      setTimeout(() => {
          setCopied(false)
-      }, 2000)
+      }, 1500)
    }
-   return <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-4 pt-8 sm:p-8 md:p-16'>
-      <div className='flex self-start w-5/12'>
-         <Image src={prismaUser.image} width={200} height={200} className="rounded-lg" alt={`profile picture for ${prismaUser.name}`} />
-         <div className='flex flex-col px-4 gap-6'>
-            <h1 className='font-bold text-2xl'>{prismaUser && prismaUser.name}</h1>
-            <p className='flex justify-between gap-6 cursor-pointer' onClick={CopyDiscord}><span className='flex gap-2 items-center'> <FaDiscord />{prismaUser.discord ? prismaUser.discord : "no discord"}</span> <FaCopy /></p>
-         </div>
-      </div>
-      <h2 className="font-bold text-xl self-start">Recent Posts</h2>
-      <div className="grid grid-flow-row gap-6 w-full grid-cols-home">
-         {userPosts && userPosts.map((post: any, i: number) => (
-            <Post post={post} key={i} />
-         ))}
-      </div>
-   </main>
+   return <>
+      <Head>
+         <title>{prismaUser.name}&apos;s Profile | E-Amigo</title>
+      </Head>
+      <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-4 pt-8 sm:p-8 md:p-16'>
+         <div className='flex self-start w-5/12'>
+            <Image src={prismaUser.image} width={200} height={200} className="rounded-lg" alt={`profile picture for ${prismaUser.name}`} />
+            <div className='flex flex-col px-4 gap-6'>
+               <h1 className='font-bold text-2xl'>{prismaUser && prismaUser.name}</h1>
+               {copied ? <p className='flex justify-between gap-6 cursor-pointer' onClick={CopyDiscord}><span className='flex gap-2 items-center'> <FaDiscord />copied</span> <FaCopy /></p> : <p className='flex justify-between gap-6 cursor-pointer' onClick={CopyDiscord}><span className='flex gap-2 items-center'> <FaDiscord />{prismaUser.discord ? prismaUser.discord : "no discord"}</span> <FaCopy /></p>}
 
+            </div>
+         </div>
+         <h2 className="font-bold text-xl self-start">Recent Posts</h2>
+         <div className="grid grid-flow-row gap-6 w-full grid-cols-home">
+            {userPosts && userPosts.map((post: any, i: number) => (
+               <Post post={post} key={i} />
+            ))}
+         </div>
+      </main>
+
+   </>
 }
 
 
 import { GetServerSidePropsContext } from "next"
 import { prisma } from 'server/db/client';
 import { useState } from 'react';
+import Head from 'next/head';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
    const { id } = context.query

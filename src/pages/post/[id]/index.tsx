@@ -76,83 +76,63 @@ export default function Post({
    const [expand, setExpand] = useState(false)
 
    return (
-      <div className="flex flex-col mt-16 p-10 gap-5 justify-between items-center">
-         <div className="w-full md:w-1/2">
-            <div className="flex justify-between">
-               <div className="flex">
-                  <Link href={`/profile/${post.user.id}`} className="flex">
-                     <Image
-                        className="h-20 w-20 rounded transition-all hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]"
-                        src={post.user.image}
-                        width={150}
-                        height={150}
-                        alt={`${post.user.name} profile picture`}
-                     />
-                     <div className="flex flex-col p-2 h-full justify-between">
-                        <h2 className="">{post.user?.name}</h2>
-                        <h1 className="font-bold text-xl">{post.title}</h1>
-                     </div>
-                  </Link>
-               </div>
-               <div className="flex flex-col items-end justify-between gap-1 h-auto p-2">
-                  <p>{formatTimeAgo(post.createdAt)}</p>
-
-                  {canLike ? <div onClick={() => { handleLike(false) }} className="flex cursor-pointer gap-1">
-                     <FaHeart className="text-primary" />
-                     <p>{likes}</p>
-                  </div> : <div onClick={() => { handleLike(true) }} className="flex cursor-pointer gap-1">
-                     <FaHeart />
-                     <p>{likes}</p>
-                  </div>
-                  }
-
-                  {post.user.id === user.id && <FaEllipsisV onClick={() => { setExpand(!expand) }} />}
-                  <AnimatePresence>
-                     {expand &&
-                        <m.div className="flex flex-col absolute p-2 border rounded bg-bg -translate-y-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                           <ul>
-                              <Link href={`/post/${id}/edit`}>
-                                 <li className="cursor-pointer hover:bg-indigo-900 p-1">Edit Post</li>
-                              </Link>
-                              <li className="cursor-pointer hover:bg-indigo-900 p-1" onClick={handleDelete}>Delete Post</li>
-                           </ul>
-                        </m.div>
-                     }
-                  </AnimatePresence>
-               </div>
-            </div>
-            <hr className="my-2 mx-1 border-indigo-300" />
-            <p className="p-1 m-1 rounded bg-primary">{post.game}</p>
-            <hr className="my-2 mx-1 border-indigo-300" />
-            <p>{post.content}</p>
-         </div>
-         <div className="w-full md:w-1/2 flex flex-col gap-5">
-            {user.id ? <form onSubmit={handleSubmit} onChange={handleChange}>
-               <fieldset disabled={disabled}>
-                  <div className='flex gap-2 justify-center flex-col'>
-                     <div className="flex w-full justify-between">
-                        <label htmlFor="content">post a comment</label>
-                        <div className="flex gap-1">
-                           <FaCommentDots /> <p>{post.totalComments}</p>
+      <>
+         <Head>
+            <title>{post.title} | E-Amigo</title>
+         </Head>
+         <div className="flex flex-col mt-16 p-10 gap-5 justify-between items-center">
+            <div className="w-full md:w-1/2">
+               <div className="flex justify-between">
+                  <div className="flex">
+                     <Link href={`/profile/${post.user.id}`} className="flex">
+                        <Image
+                           className="h-20 w-20 rounded transition-all hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]"
+                           src={post.user.image}
+                           width={150}
+                           height={150}
+                           alt={`${post.user.name} profile picture`}
+                        />
+                        <div className="flex flex-col p-2 h-full justify-between">
+                           <h2 className="">{post.user?.name}</h2>
+                           <h1 className="font-bold text-xl">{post.title}</h1>
                         </div>
+                     </Link>
+                  </div>
+                  <div className="flex flex-col items-end justify-between gap-1 h-auto p-2">
+                     <p>{formatTimeAgo(post.createdAt)}</p>
+
+                     {canLike ? <div onClick={() => { handleLike(false) }} className="flex cursor-pointer gap-1">
+                        <FaHeart className="text-primary" />
+                        <p>{likes}</p>
+                     </div> : <div onClick={() => { handleLike(true) }} className="flex cursor-pointer gap-1">
+                        <FaHeart />
+                        <p>{likes}</p>
                      </div>
-                     <textarea
-                        className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary'
-                        name="content"
-                        required
-                        placeholder="hi i msged you on discord"
-                        value={comment.content}
-                        onChange={() => { }}
-                        rows={5}
-                     ></textarea>
+                     }
+
+                     {post.user.id === user.id && <FaEllipsisV onClick={() => { setExpand(!expand) }} />}
+                     <AnimatePresence>
+                        {expand &&
+                           <m.div className="flex flex-col absolute p-2 border rounded bg-bg -translate-y-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                              <ul>
+                                 <Link href={`/post/${id}/edit`}>
+                                    <li className="cursor-pointer hover:bg-indigo-900 p-1">Edit Post</li>
+                                 </Link>
+                                 <li className="cursor-pointer hover:bg-indigo-900 p-1" onClick={handleDelete}>Delete Post</li>
+                              </ul>
+                           </m.div>
+                        }
+                     </AnimatePresence>
                   </div>
-                  <div className='flex justify-center items-center my-4'>
-                     <Button type="submit" >SUBMIT</Button>
-                  </div>
-               </fieldset>
-            </form> :
-               <form onSubmit={handleSubmit} onChange={handleChange}>
-                  <fieldset disabled={true}>
+               </div>
+               <hr className="my-2 mx-1 border-indigo-300" />
+               <p className="p-1 m-1 rounded bg-primary">{post.game}</p>
+               <hr className="my-2 mx-1 border-indigo-300" />
+               <p>{post.content}</p>
+            </div>
+            <div className="w-full md:w-1/2 flex flex-col gap-5">
+               {user.id ? <form onSubmit={handleSubmit} onChange={handleChange}>
+                  <fieldset disabled={disabled}>
                      <div className='flex gap-2 justify-center flex-col'>
                         <div className="flex w-full justify-between">
                            <label htmlFor="content">post a comment</label>
@@ -164,7 +144,9 @@ export default function Post({
                            className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary'
                            name="content"
                            required
-                           placeholder="PLEASE LOGIN"
+                           placeholder="hi i msged you on discord"
+                           value={comment.content}
+                           onChange={() => { }}
                            rows={5}
                         ></textarea>
                      </div>
@@ -172,14 +154,37 @@ export default function Post({
                         <Button type="submit" >SUBMIT</Button>
                      </div>
                   </fieldset>
-               </form>}
-            <div className="flex flex-col gap-10">
-               {comments?.map((comment: any) => (
-                  <Comment comment={comment} key={comment.id} onChange={(e: any) => { deleteComment(e); post.totalComments -= 1 }} owner={comment.user.id === user.id} />
-               ))}
+               </form> :
+                  <form onSubmit={handleSubmit} onChange={handleChange}>
+                     <fieldset disabled={true}>
+                        <div className='flex gap-2 justify-center flex-col'>
+                           <div className="flex w-full justify-between">
+                              <label htmlFor="content">post a comment</label>
+                              <div className="flex gap-1">
+                                 <FaCommentDots /> <p>{post.totalComments}</p>
+                              </div>
+                           </div>
+                           <textarea
+                              className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary'
+                              name="content"
+                              required
+                              placeholder="PLEASE LOGIN"
+                              rows={5}
+                           ></textarea>
+                        </div>
+                        <div className='flex justify-center items-center my-4'>
+                           <Button type="submit" >SUBMIT</Button>
+                        </div>
+                     </fieldset>
+                  </form>}
+               <div className="flex flex-col gap-10">
+                  {comments?.map((comment: any) => (
+                     <Comment comment={comment} key={comment.id} onChange={(e: any) => { deleteComment(e); post.totalComments -= 1 }} owner={comment.user.id === user.id} />
+                  ))}
+               </div>
             </div>
          </div>
-      </div>
+      </>
    )
 }
 
@@ -189,6 +194,7 @@ import Comment from "@/components/Comment"
 import { getServerSession } from "next-auth"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import Link from "next/link"
+import Head from "next/head"
 export async function getServerSideProps(context: any) {
    const { id } = context.query
    const prismapost = await prisma.post.findFirstOrThrow({
