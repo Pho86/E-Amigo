@@ -4,7 +4,8 @@ import { useState } from "react"
 import { AnimatePresence, m } from "framer-motion"
 export default function EllipseMenu({
    onDelete,
-   onEdit
+   onEdit,
+   
 }: {
    onEdit: () => void
    onDelete: any

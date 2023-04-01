@@ -21,7 +21,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
    }
    let { id, content } = req.body.comment
    let postId = Number(req.body.postId)
-   console.log(req.body.comment.content)
    switch (method) {
       case 'POST':
          const comment = await prisma.comment.create({
@@ -32,6 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             },
             include: {
                user: true,
+               post: true,
             },
          })
          const updatePost = await prisma.post.update({

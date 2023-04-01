@@ -28,6 +28,7 @@ export default function Comment({
    const [edit, setEdit] = useState(false)
    const [editedComment, setEditedComment] = useState(comment)
    const [activeComment, setActiveComment] = useState(comment)
+
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       try {
@@ -42,6 +43,7 @@ export default function Comment({
       }
    }
    const handleChange = (event: any) => {
+      console.log(comment.post.id)
       setEditedComment({ ...editedComment, [event.target.name]: event.target.value });
    };
    const handleDelete = async (e: React.MouseEvent<HTMLElement>) => {

@@ -21,10 +21,12 @@ export default function Post({
 }) {
    const [comment, setComment] = useState({
       content: "",
+      id: ""
    })
    const [disabled, setDisabled] = useState(false)
    const handleChange = (event: any) => {
       setComment({ ...comment, [event.target.name]: event.target.value });
+      console.log(comments)
    };
    const [comments, setComments] = useState(initialcomments)
    const router = useRouter()
