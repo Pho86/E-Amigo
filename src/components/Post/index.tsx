@@ -34,13 +34,13 @@ export default function Post({
                      alt={`${post.user.name} profile picture`}
                   />
                   <div className="flex flex-col h-full px-2 justify-between">
-                     <h2 className="">{post.user?.name}</h2>
+                     <h2 className="font-semibold">{post.user?.name}</h2>
                      <h1 className="font-bold text-xl ">{post.title}</h1>
                   </div>
                </div>
                <div className="flex flex-col gap-1 items-end">
                   <p className="whitespace-nowrap">{formatTimeAgo(post.createdAt)} </p>
-                  <p className="p-1 my-1 rounded bg-primary whitespace-nowrap">{post.game}</p>
+                  <p className="p-1 px-2 my-1 rounded bg-primary whitespace-nowrap">{post.game}</p>
                   <div className="flex gap-4">
                      <p className="flex gap-1"><FaHeart /> {post.totalLikes}</p>
                      <p className="flex gap-1"><FaCommentDots /> {post.totalComments}</p>

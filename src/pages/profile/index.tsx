@@ -46,9 +46,9 @@ export default function Profile({ userPosts, prismaUser }: {
          </Head>
          <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-4 pt-8 sm:p-8 md:p-16'>
             <div className='flex self-start justify-between w-full'>
-               <div className='flex w-1/2'>
+               <div className='flex flex-col w-full md:flex-row md:w-1/2'>
                   {/* @ts-ignore */}
-                  <Image src={session.user.image} width={250} height={250} className="rounded-lg" alt={`profile picture for ${session.user.name}`} />
+                  <Image src={session.user.image} width={250} height={250} className="rounded-lg self-center md:self-auto" alt={`profile picture for ${session.user.name}`} />
                   <div className='flex flex-col gap-6 px-4 w-full'>
                      {/* @ts-ignore */}
                      <h1 className='font-bold text-2xl'>{session && session.user.name}</h1>

@@ -22,7 +22,7 @@ export default function NavBar({
          <Link href="/createpost" className="hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all place-self-center">
             <FaPlusCircle size={30} />
          </Link>
-         <Link href="/profile" className="place-self-end">
+         <Link href="/profile" className="place-self-end self-center">
             {user ?
                <Image
                   className="rounded hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all"
@@ -33,7 +33,7 @@ export default function NavBar({
                   alt="user image"
                />
                :
-               <FaUser className="hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all" />
+               <FaUser size={25} className="hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all" />
             }
          </Link>
       </nav>

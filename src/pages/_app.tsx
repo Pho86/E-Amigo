@@ -21,10 +21,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
         }
       `}</style>
     <Head>
-      <meta name="description" content="E-Amigo, Teammates on demand." />
+      <meta name="description" content="E-Amigo, finding other gamer friends." />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <meta content="/logo.svg" property='og:image' />
-      <meta property="og:description" content="E-Amigo, Teammates on demand." />
+      <meta content="/logo.png" property='og:image' />
+      <meta property="og:description" content="E-Amigo, finding other gamer friends." />
       <link rel="icon" href="/logo.svg" />
     </Head>
     <SessionProvider session={session}>

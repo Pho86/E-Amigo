@@ -19,7 +19,7 @@ export default function Home({
                 <title>E-Amigo | Gaming With Friends</title>
             </Head>
 
-            <main className="mt-24 flex-col flex justify-center w-full items-center p-4 pt-8 sm:p-8 md:p-16 gap-5">
+            <main className="mt-24 flex-col flex justify-center w-full items-center p-4 pt-8 sm:p-8 md:p-16 gap-6">
                 <div className="w-full grid grid-cols-1 max-h-[1000px] md:min-h-[600px] md:grid-cols-2">
                     <div className="pr-10 flex flex-col gap-6 h-1/2 justify-between">
                         <div className="flex flex-col">
@@ -64,8 +64,8 @@ export default function Home({
                         ))}
                     </m.div>
                 </section>
-                <section className="my-5 flex flex-col gap-5">
-                    <h2 className="font-bold text-xl">Login or check your E-Amigo profile</h2>
+                <section className="my-8 flex flex-col gap-5">
+                    <h2 className="font-bold text-xl">Login or check your E-Amigo profile!</h2>
                     <div className="flex">
                         <Link href="/profile" className="w-full px-4">
                             <Button>Login/Profile</Button>
