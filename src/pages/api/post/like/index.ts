@@ -48,7 +48,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(201).json(IncrementLike);
       break
     case 'DELETE':
-      console.log(req.body.postId)
       const deleteLike = await prisma.like.deleteMany({
         where: {
           postId: postId,

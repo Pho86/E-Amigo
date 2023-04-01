@@ -15,7 +15,7 @@ export default function Home({
 }) {
     return (
         <>
-            <main className="mt-20 flex-col flex justify-center w-full items-center p-8 md:p-16 gap-5">
+            <main className="mt-24 flex-col flex justify-center w-full items-center p-4 pt-8 sm:p-8 md:p-16 gap-5">
                 <div className="w-full grid grid-cols-1 max-h-[1000px] md:min-h-[600px] md:grid-cols-2">
                     <div className="pr-10 flex flex-col gap-6 h-1/2 justify-between">
                         <div className="flex flex-col">
@@ -23,9 +23,9 @@ export default function Home({
                             <m.hr className="border-primary border-2 mt-2 rounded-md" initial={{ opacity: 0, width: 0 }} animate={{ opacity: 1, width: "100%" }} transition={{ duration: 1.2, delay: .2 }} />
                         </div>
                         <m.div className="flex flex-col gap-3 p-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: .3 }}>
-                            <p>E-Amigo is a <span className="text-secondary font-semibold">community</span> designed to connect <span className="text-secondary font-semibold">gamers</span> globally by providing them with a platform to play video games together and make new friends.</p>
+                            <p>E-Amigo is a <span className="text-secondary font-semibold">community</span> designed to connect <span className="text-secondary font-semibold">gamers</span> globally by providing them with a platform to find others to play video games together and make new friends.</p>
                             <p>We aspire to create <span className="text-secondary font-semibold">authentic connections</span> among our community members. Although the journey may be challenging, we are committed to embarking on it together with our community.</p>
-                            <p>We respect gamers for their passion and tenacity for the things they hold dear. At E-Amigo, we strive to establish a bridge that connects individuals worldwide and allows them to indulge in their passion for gaming while making new friends. Become part of the <Link href="/profile" className="text-secondary font-semibold">Amigos</Link> today.</p>
+                            <p>We respect gamers for their <span className="text-secondary font-semibold">passion and tenacity</span> for the things they hold dear. At E-Amigo, we strive to establish a bridge that connects individuals worldwide and allows them to indulge in their passion for gaming while making new friends. Become part of the <Link href="/profile" className="text-secondary font-semibold">Amigos</Link> today.</p>
                         </m.div>
                         <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: .4 }} className="p-2">
                             <Scroll to="posts" className=""
@@ -41,7 +41,7 @@ export default function Home({
                         </m.div>
                     </div>
                     <Suspense fallback={<div>Loading...</div>}>
-                        <m.div className="p-8 max-h-[600px]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 3, delay: 2 }}>
+                        <m.div className="max-h-[600px]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 3, delay: 2 }}>
                             <Spline scene="https://prod.spline.design/OFVNpul-5fMB04Hx/scene.splinecode" />
                         </m.div>
                     </Suspense>
@@ -60,7 +60,14 @@ export default function Home({
                         ))}
                     </m.div>
                 </section>
-
+                <section className="my-5 flex flex-col gap-5">
+                    <h2 className="font-bold text-xl">Login or check your E-Amigo profile</h2>
+                    <div className="flex">
+                        <Link href="/profile" className="w-full px-4">
+                            <Button>Login/Profile</Button>
+                        </Link>
+                    </div>
+                </section>
             </main>
         </>
     )

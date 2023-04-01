@@ -9,10 +9,16 @@ export default function Profile({ userPosts, prismaUser }: {
    userPosts: any
    prismaUser: any
 }) {
+   const [copied, setCopied] = useState(false)
    const CopyDiscord = async () => {
+      setCopied(true)
       navigator.clipboard.writeText(prismaUser.discord)
+      setTimeout(()=>{
+         
+         setCopied(false)
+      }, 2000)
    }
-   return <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-16'>
+   return <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-4 pt-8 sm:p-8 md:p-16'>
       <div className='flex self-start w-5/12'>
          <Image src={prismaUser.image} width={200} height={200} className="rounded-lg" alt={`profile picture for ${prismaUser.name}`} />
          <div className='flex flex-col px-4 gap-6'>
@@ -33,6 +39,7 @@ export default function Profile({ userPosts, prismaUser }: {
 
 import { GetServerSidePropsContext } from "next"
 import { prisma } from 'server/db/client';
+import { useState } from 'react';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
    const { id } = context.query

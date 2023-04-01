@@ -65,7 +65,7 @@ export default function Comment({
             </div>
             <div className="flex flex-col items-end gap-2">
 
-               {activeComment.updatedAt === activeComment.createdAt ? <p>Created {formatTimeAgo(activeComment.createdAt)} </p> : <><p>Created {formatTimeAgo(activeComment.createdAt)} </p><p>Updated {formatTimeAgo(activeComment.updatedAt)}... </p> </>}
+               {activeComment.updatedAt === activeComment.createdAt ? <p>created {formatTimeAgo(activeComment.createdAt)} </p> : <><p>created {formatTimeAgo(activeComment.createdAt)} </p><p>updated {formatTimeAgo(activeComment.updatedAt)}</p> </>}
                {owner && <EllipseMenu onEdit={() => { setEdit(!edit) }} onDelete={(e: React.MouseEvent<HTMLElement>) => { handleDelete(e); onChange(comment); }} />}
             </div>
          </div>

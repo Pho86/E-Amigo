@@ -33,7 +33,7 @@ export default function Post({
    }
    return (
       <div className="mt-20 w-full flex flex-col justify-between items-center p-10 ">
-         <h1 className="font-bold text-2xl">Edit Your Posting</h1>
+         <h1 className="font-bold text-2xl mb-4">Edit Your Posting</h1>
          <form onSubmit={handleSubmit} onChange={handleChange} className="w-full md:w-8/12">
             <fieldset disabled={disabled} className="flex flex-col gap-2"> 
                <div className='flex gap-2 justify-center flex-col'>

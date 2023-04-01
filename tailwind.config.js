@@ -27,7 +27,7 @@ module.exports = {
         ]
       },
       gridTemplateColumns:{
-        'home': 'repeat(auto-fit, minmax(350px,3fr));'
+        'home': 'repeat(auto-fit, minmax(370px,3fr));'
       }
     },
   },

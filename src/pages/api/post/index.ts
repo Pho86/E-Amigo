@@ -55,6 +55,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                postId: id
             }
          })
+         const deleteLikes = await prisma.like.deleteMany({
+            where: {
+               postId: id
+            }
+         })
          const deletePost = await prisma.post.delete({
             where: {
                id: id

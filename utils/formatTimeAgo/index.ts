@@ -1,12 +1,14 @@
-import TimeAgo from 'javascript-time-ago'
-const timeAgo = new TimeAgo('en-US')
+import TimeAgo from "javascript-time-ago";
+import en from "javascript-time-ago/locale/en";
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo("en-US");
 
-export default function formatTimeAgo(time:any) {
-  if (!time) {
+export default function formatTimeAgo(date: any) {
+  if (!date) {
     return ''
   }
-  if (typeof time === 'string') {
-    time = new Date(time)
+  if (typeof date === 'string') {
+    date = new Date(date)
   }
-  return timeAgo.format(time)
+  return timeAgo.format(date)
 }

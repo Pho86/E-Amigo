@@ -5,12 +5,13 @@ import SiteNavigation from '@/components/SiteNavigation'
 import { LazyMotion, domAnimation, m } from "framer-motion"
 
 import { Exo } from 'next/font/google'
+import Head from 'next/head'
 const exo = Exo({ subsets: ['latin'], })
 
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
-TimeAgo.setDefaultLocale(en.locale);
-TimeAgo.addLocale(en);
+// import TimeAgo from "javascript-time-ago";
+// import en from "javascript-time-ago/locale/en";
+// TimeAgo.setDefaultLocale(en.locale);
+// TimeAgo.addLocale(en);
 
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return <>
@@ -19,7 +20,13 @@ export default function App({ Component, pageProps: { session, ...pageProps } }:
           font-family: ${exo.style.fontFamily};
         }
       `}</style>
-
+    <Head>
+      <meta name="description" content="E-Amigo, Teammates on demand." />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta content="/logo.svg" property='og:image' />
+      <meta property="og:description" content="E-Amigo, Teammates on demand." />
+      <link rel="icon" href="/logo.svg" />
+    </Head>
     <SessionProvider session={session}>
       <LazyMotion features={domAnimation}>
         <SiteNavigation />
