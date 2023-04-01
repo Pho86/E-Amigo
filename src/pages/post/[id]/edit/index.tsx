@@ -7,13 +7,7 @@ export default function Post({
 }: {
    post: any,
 }) {
-   useEffect(() => {
-      if (initialPost.user.id) {
-
-      }
-   }, [])
    const [disabled, setDisabled] = useState(false)
-
    const [post, setPost] = useState(initialPost)
    const handleChange = (event: any) => {
       setPost({ ...post, [event.target.name]: event.target.value });
@@ -23,7 +17,6 @@ export default function Post({
       e.preventDefault()
       try {
          setDisabled(true)
-         console.log(post)
          const req = await axios.put('/api/post/', { post });
          router.push('/')
       }
@@ -34,7 +27,7 @@ export default function Post({
    return (
       <>
          <Head>
-            <title>Editing: {post.title} | E-Amigo</title>
+            <title>{`Editing: ${post.title} | E-Amigo`}</title>
          </Head>
          <div className="mt-20 w-full flex flex-col justify-between items-center p-10 ">
             <h1 className="font-bold text-2xl mb-4">Edit Your Posting</h1>
@@ -88,10 +81,21 @@ export default function Post({
 
 import { prisma } from "server/db/client"
 import Button from "@/components/Button"
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import Head from "next/head"
 export async function getServerSideProps(context: any) {
    const { id } = context.query
-   const prismapost = await prisma.post.findFirstOrThrow({
+   const session = await getServerSession(context.req, context.res, authOptions);
+   if (!session) {
+      return {
+         redirect: {
+            destination: "/api/auth/signin",
+            permanent: false
+         }
+      }
+   }
+   const prismaPost = await prisma.post.findFirstOrThrow({
       where: {
          id: Number(id)
       },
@@ -99,9 +103,18 @@ export async function getServerSideProps(context: any) {
          user: true,
       }
    })
+   // @ts-ignore
+   if (session.user.email != prismaPost.user.email) {
+      return {
+         redirect: {
+            destination: `/post/${id}/`,
+            permanent: false
+         }
+      }
+   }
    return {
       props: {
-         post: JSON.parse(JSON.stringify(prismapost)),
+         post: JSON.parse(JSON.stringify(prismaPost)),
       }
    }
 }

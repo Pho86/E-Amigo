@@ -6,6 +6,7 @@ import Button from "@/components/Button"
 const Spline = React.lazy(() => import('@splinetool/react-spline'));
 import Link from "next/link";
 import { postProps } from "@/components/Post";
+
 export default function Home({
     posts,
     randomUsers,
@@ -20,8 +21,8 @@ export default function Home({
             </Head>
 
             <main className="mt-24 flex-col flex justify-center w-full items-center p-4 pt-8 sm:p-8 md:p-16 gap-6">
-                <div className="w-full grid grid-cols-1 max-h-[1000px] md:min-h-[600px] md:grid-cols-2">
-                    <div className="pr-10 flex flex-col gap-6 h-1/2 justify-between">
+                <div className="w-full grid grid-cols-1 max-h-[1000px] md:min-h-[600px] md:grid-cols-[45%_55%]">
+                    <div className="flex flex-col gap-6 h-1/2 justify-between z-50">
                         <div className="flex flex-col">
                             <m.h1 initial={{ opacity: 0, width: "25%" }} animate={{ opacity: 1, width: "100%" }} transition={{ duration: 1.1, delay: .2 }} className="font-bold text-4xl whitespace-nowrap">Welcome to <span className="text-primary font-extrabold">E-Amigo</span>!</m.h1>
                             <m.hr className="border-primary border-2 mt-2 rounded-md" initial={{ opacity: 0, width: 0 }} animate={{ opacity: 1, width: "100%" }} transition={{ duration: 1.2, delay: .2 }} />
@@ -45,13 +46,13 @@ export default function Home({
                         </m.div>
                     </div>
                     <Suspense fallback={<div>Loading...</div>}>
-                        <m.div className="max-h-[600px]" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 3, delay: 2 }}>
+                        <m.div className="max-h-[600px]" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: "100%" }} transition={{ duration: 2, delay: 2 }}>
                             <Spline scene="https://prod.spline.design/OFVNpul-5fMB04Hx/scene.splinecode" />
                         </m.div>
                     </Suspense>
 
                 </div>
-                <section id="posts" className="w-full mb-10">
+                <section id="posts" className="w-full mb-10 z-50">
                     <div className="flex justify-between">
                         <h2 className="font-bold text-2xl self-start">Recent Posts</h2>
                         <Link href="/createpost">
@@ -65,7 +66,7 @@ export default function Home({
                     </m.div>
                 </section>
                 <section className="my-8 flex flex-col gap-5">
-                    <h2 className="font-bold text-xl">Login or check your E-Amigo profile!</h2>
+                    <h2 className="font-bold text-xl">Login or check your E-Amigo profile</h2>
                     <div className="flex">
                         <Link href="/profile" className="w-full px-4">
                             <Button>Login/Profile</Button>

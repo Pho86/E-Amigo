@@ -79,7 +79,7 @@ export default function Post({
    return (
       <>
          <Head>
-            <title>{post.title} | E-Amigo</title>
+            <title>{`${post.title} | E-Amigo`}</title>
          </Head>
          <div className="flex flex-col mt-16 p-10 gap-5 justify-between items-center">
             <div className="w-full md:w-1/2">
@@ -219,8 +219,8 @@ export async function getServerSideProps(context: any) {
       }
    })
    let user;
-   let liked;
-   let active;
+   let liked = {}
+   let active 
    const session = await getServerSession(context.req, context.res, authOptions);
    if (session) {
       user = await prisma.user.findUnique({
@@ -233,13 +233,12 @@ export async function getServerSideProps(context: any) {
             userId: user!.id
          }
       })
-      if (liked.length > 0) active = true
+      if (Object.keys(liked).length > 0) active = true
       else active = false
    } else {
       user = {};
       active = false
    }
-   console.log(active)
    return {
       props: {
          post: JSON.parse(JSON.stringify(prismapost)),

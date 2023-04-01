@@ -42,7 +42,7 @@ export default function Profile({ userPosts, prismaUser }: {
       return <>
          <Head>
             {/* @ts-ignore */}
-            <title>{session.user.name} Profile | E-Amigo</title>
+            <title>{`${session.user.name} Profile | E-Amigo`}</title>
          </Head>
          <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-4 pt-8 sm:p-8 md:p-16'>
             <div className='flex self-start justify-between w-full'>
