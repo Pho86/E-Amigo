@@ -4,6 +4,7 @@ import axios from "axios"
 import { useRouter } from "next/router"
 import formatTimeAgo from "utils/formatTimeAgo"
 import { FaCommentDots, FaEllipsisV, FaHeart } from "react-icons/fa"
+import { AnimatePresence, m } from "framer-motion"
 
 export default function Post({
    post,
@@ -96,26 +97,28 @@ export default function Post({
                <div className="flex flex-col items-end justify-between gap-1 h-auto p-2">
                   <p>{formatTimeAgo(post.createdAt)}</p>
 
-                  {canLike ? <div onClick={() => {handleLike(false)}} className="flex cursor-pointer gap-1">
-                     <FaHeart />
+                  {canLike ? <div onClick={() => { handleLike(false) }} className="flex cursor-pointer gap-1">
+                     <FaHeart className="text-primary" />
                      <p>{likes}</p>
-                  </div> : <div onClick={() => {handleLike(true)}} className="flex cursor-pointer gap-1">
+                  </div> : <div onClick={() => { handleLike(true) }} className="flex cursor-pointer gap-1">
                      <FaHeart />
                      <p>{likes}</p>
                   </div>
                   }
 
                   {post.user.id === user.id && <FaEllipsisV onClick={() => { setExpand(!expand) }} />}
-                  {expand &&
-                     <div className="flex flex-col absolute p-2 border rounded bg-bg -translate-y-8">
-                        <ul>
-                           <Link href={`/post/${id}/edit`}>
-                              <li className="cursor-pointer hover:bg-indigo-900 p-1">Edit Post</li>
-                           </Link>
-                           <li className="cursor-pointer hover:bg-indigo-900 p-1" onClick={handleDelete}>Delete Post</li>
-                        </ul>
-                     </div>
-                  }
+                  <AnimatePresence>
+                     {expand &&
+                        <m.div className="flex flex-col absolute p-2 border rounded bg-bg -translate-y-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                           <ul>
+                              <Link href={`/post/${id}/edit`}>
+                                 <li className="cursor-pointer hover:bg-indigo-900 p-1">Edit Post</li>
+                              </Link>
+                              <li className="cursor-pointer hover:bg-indigo-900 p-1" onClick={handleDelete}>Delete Post</li>
+                           </ul>
+                        </m.div>
+                     }
+                  </AnimatePresence>
                </div>
             </div>
             <hr className="my-2 mx-1 border-indigo-300" />

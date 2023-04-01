@@ -27,13 +27,13 @@ export default function Post({
             <div className="flex justify-between">
                <div className="flex">
                   <Image
-                     className="h-20 w-20 rounded"
+                     className="h-24 w-24 rounded"
                      src={post.user.image}
                      width={150}
                      height={150}
                      alt={`${post.user.name} profile picture`}
                   />
-                  <div className="flex flex-col p-2 h-full justify-between">
+                  <div className="flex flex-col h-full px-2 justify-between">
                      <h2 className="">{post.user?.name}</h2>
                      <h1 className="font-bold text-xl">{post.title}</h1>
                   </div>

@@ -42,7 +42,7 @@ export default function Post({
                      type="title"
                      name="title"
                      required
-                     placeholder="Need someone for VALORANT 5Q"
+                     placeholder="Need someone for VALORANT 5 stack..."
                      value={post.title}
                      className='p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary'
                      onChange={() => { }}

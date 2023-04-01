@@ -7,7 +7,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaEnvelope } from 'react-icons/fa';
 import { postProps } from '@/components/Post';
-import {m, AnimatePresence} from "framer-motion"
+import { m, AnimatePresence } from "framer-motion"
 import { FaDiscord } from 'react-icons/fa';
 export default function Profile({ userPosts, prismaUser }: {
    userPosts: postProps
@@ -21,19 +21,24 @@ export default function Profile({ userPosts, prismaUser }: {
    };
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
-      try {
-         setDisabled(true)
-         const req = await axios.put('/api/discord', { discord: discord, id: prismaUser.id });
-         setOldDiscord(discord)
+      if (discord.toString().match(/^.{3,32}#[0-9]{4}$/)) {
+         try {
+            setDisabled(true)
+            const req = await axios.put('/api/discord', { discord: discord, id: prismaUser.id });
+            setOldDiscord(discord)
+         }
+         catch (error) {
+            console.log(error)
+         }
       }
-      catch (error) {
-         console.log(error)
+      else {
+         alert("not a valid discord tag")
       }
    }
    const [edit, setEdit] = useState(false)
    const { data: session } = useSession();
    if (session) {
-      return <main className='flex flex-col justify-between w-full mt-16 items-center gap-5 p-10'>
+      return <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-16'>
          <div className='flex self-start justify-between w-full'>
             <div className='flex w-5/12'>
                {/* @ts-ignore */}
@@ -42,16 +47,16 @@ export default function Profile({ userPosts, prismaUser }: {
                   {/* @ts-ignore */}
                   <h1 className='font-bold text-xl'>{session && session.user.name}</h1>
                   {/* @ts-ignore */}
-                  <p className='flex gap-2'> <FaEnvelope/> {session.user.email}</p>
+                  <p className='flex gap-2'> <FaEnvelope /> {session.user.email}</p>
                   <div>
-                     <p className='flex justify-between gap-2'><span className='flex gap-2 items-center'> <FaDiscord/>{oldDiscord ? oldDiscord : "no discord"}</span> <FaEdit onClick={() => { setEdit(!edit) }} className="hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all hover:scale-110 cur" /></p>
+                     <p className='flex justify-between gap-2'><span className='flex gap-2 items-center'> <FaDiscord />{oldDiscord ? oldDiscord : "no discord"}</span> <FaEdit onClick={() => { setEdit(!edit) }} className="hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all hover:scale-110 cur" /></p>
                      <AnimatePresence>
-                     {edit && <m.form onChange={handleChange} onSubmit={handleSubmit} className="absolute p-2 bg-primarybg rounded-b-xl" initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
-                        <fieldset className='flex gap-2 flex-col md:flex-row'>
-                           <input value={discord.discord} placeholder="discord tag" className='p-2 rounded text-black border-x-[3px] outline-primary border-primary' onChange={() => { }} />
-                           <Button type="submit" className='w-full'>Submit</Button>
-                        </fieldset>
-                     </m.form>}
+                        {edit && <m.form onChange={handleChange} onSubmit={handleSubmit} className="absolute p-2 bg-primarybg rounded-b-xl z-50" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                           <fieldset className='flex gap-2 flex-col md:flex-row'>
+                              <input value={discord.discord} placeholder="discord tag" className='p-2 rounded text-black border-x-[3px] outline-primary border-primary' onChange={() => { }} />
+                              <Button type="submit" className='w-full'>Submit</Button>
+                           </fieldset>
+                        </m.form>}
                      </AnimatePresence>
                   </div>
                   <Button onClick={() => { signOut() }}>Signout </Button>

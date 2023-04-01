@@ -6,6 +6,7 @@ import axios from "axios";
 import { postProps } from "../Post";
 import Button from "../Button";
 import Link from "next/link";
+import { AnimatePresence, m } from "framer-motion";
 export interface commentProps {
    id: number,
    createdAt: string,
@@ -52,31 +53,33 @@ export default function Comment({
          <div className="flex items-center w-full justify-between">
             <div className="flex">
                <Link href={`/profile/${comment.user.id}`} className="flex">
-               <Image
-                  className="h-12 w-12 rounded transition-all hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]"
-                  src={comment.user.image}
-                  width={50}
-                  height={50}
-                  alt="comment user image"
+                  <Image
+                     className="h-12 w-12 rounded transition-all hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]"
+                     src={comment.user.image}
+                     width={50}
+                     height={50}
+                     alt="comment user image"
                   />
-               <h3 className="p-2 font-semibold text-lg">{comment.user.name}</h3>
-                  </Link>
+                  <h3 className="p-2 font-semibold text-lg">{comment.user.name}</h3>
+               </Link>
             </div>
             <div className="flex flex-col items-end gap-2">
 
-               {activeComment.updatedAt === activeComment.createdAt ? <p>Created {formatTimeAgo(activeComment.createdAt)} </p>: <><p>Created {formatTimeAgo(activeComment.createdAt)} </p><p>Updated {formatTimeAgo(activeComment.updatedAt)}... </p> </>}
-               {owner && <EllipseMenu onEdit={() => { setEdit(!edit) }} onDelete={(e: React.MouseEvent<HTMLElement>) => { handleDelete(e); onChange(comment); }} /> }
+               {activeComment.updatedAt === activeComment.createdAt ? <p>Created {formatTimeAgo(activeComment.createdAt)} </p> : <><p>Created {formatTimeAgo(activeComment.createdAt)} </p><p>Updated {formatTimeAgo(activeComment.updatedAt)}... </p> </>}
+               {owner && <EllipseMenu onEdit={() => { setEdit(!edit) }} onDelete={(e: React.MouseEvent<HTMLElement>) => { handleDelete(e); onChange(comment); }} />}
             </div>
          </div>
          <hr className="mt-4 mb-2 p-1 border-primary " />
          <p className="px-2 border-l-2 border-primary">{activeComment.content}</p>
-         {edit && <form onSubmit={handleSubmit} >
-            <fieldset disabled={disabled} className="flex gap-2 flex-col">
+         <AnimatePresence>
+            {edit && <m.form onSubmit={handleSubmit} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+               <fieldset disabled={disabled} className="flex gap-2 flex-col">
 
-               <input className="p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary mt-2" name="content" value={editedComment.content} onChange={handleChange}></input>
-               <Button type="submit">Submit</Button>
-            </fieldset>
-         </form>}
+                  <input className="p-2 rounded w-full text-black border-x-[3px] outline-primary border-primary mt-2" name="content" value={editedComment.content} onChange={handleChange}></input>
+                  <Button type="submit">Submit</Button>
+               </fieldset>
+            </m.form>}
+         </AnimatePresence>
 
       </div>
    )

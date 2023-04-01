@@ -13,7 +13,7 @@ export default function Home({
 }) {
     return (
         <>
-            <main className="mt-20 flex-col flex justify-center w-full items-center p-10 gap-5">
+            <main className="mt-20 flex-col flex justify-center w-full items-center p-16 gap-5">
                 <div className="w-full grid grid-cols-1 max-h-[1000px] md:min-h-[600px] md:grid-cols-2">
                     <div className="pr-10 flex flex-col gap-10 h-1/2 justify-between">
                         <div className="flex flex-col">
@@ -23,7 +23,7 @@ export default function Home({
                         <m.div className="flex flex-col gap-3 p-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: .3 }}>
                             <p>E-Amigos is a <span className="text-secondary font-semibold">community</span> designed to connect gamers globally by providing them with a platform to play video games together and make new friends.</p>
                             <p>We aspire to create authentic connections among our community members. Although the journey may be challenging, we are committed to embarking on it together with our community.</p>
-                            <p>We respect gamers for their passion and tenacity for the things they hold dear. At E-Amigos, we strive to establish a bridge that connects individuals worldwide and allows them to indulge in their passion for gaming while making new friends. Become a part of the <Link href="/profile" className="text-secondary font-semibold">Amigos</Link> today.</p>
+                            <p>We respect gamers for their passion and tenacity for the things they hold dear. At E-Amigos, we strive to establish a bridge that connects individuals worldwide and allows them to indulge in their passion for gaming while making new friends. Become part of the <Link href="/profile" className="text-secondary font-semibold">Amigos</Link> today.</p>
                         </m.div>
                         <m.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5, delay: .4 }} className="p-2">
                             <Scroll to="posts" className=""
