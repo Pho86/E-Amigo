@@ -73,11 +73,11 @@ export default function Post({
    const [likes, setLikes] = useState(post.totalLikes)
    const [liked, setLiked] = useState(initialLiked)
    const [canLike, setCanLike] = useState(active)
-   console.log(liked)
    const [expand, setExpand] = useState(false)
+   
    return (
       <div className="flex flex-col mt-16 p-10 gap-5 justify-between items-center">
-         <div className="w-1/2">
+         <div className="w-full md:w-1/2">
             <div className="flex justify-between">
                <div className="flex">
                   <Link href={`/profile/${post.user.id}`} className="flex">
@@ -124,7 +124,7 @@ export default function Post({
             <hr className="my-2 p-[.5px] bg-indigo-900" />
             <p>{post.content}</p>
          </div>
-         <div className="w-1/2 flex flex-col gap-5">
+         <div className="w-full md:w-1/2 flex flex-col gap-5">
             {user.id ? <form onSubmit={handleSubmit} onChange={handleChange}>
                <fieldset disabled={disabled}>
                   <div className='flex gap-2 justify-center flex-col'>

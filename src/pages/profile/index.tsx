@@ -37,7 +37,7 @@ export default function Profile({ userPosts, prismaUser }: {
                <div className='flex flex-col gap-2 px-4 justify-between w-full'>
                   <h1 className='font-bold text-xl'>{session && session.user.name}</h1>
                   <p> {session.user.email}</p>
-                  <p className='flex justify-between gap-2'> {oldDiscord ? oldDiscord : "no discord"} <FaEdit onClick={() => { setEdit(!edit) }} /></p>
+                  <p className='flex justify-between gap-2'> {oldDiscord ? oldDiscord : "no discord"} <FaEdit onClick={() => { setEdit(!edit) }} className="hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all hover:scale-110 cur"/></p>
                   {edit && <form onChange={handleChange} onSubmit={handleSubmit} className="">
                      <fieldset className='flex gap-2'>
                         <input value={discord.discord} placeholder="discord tag" className='p-2 rounded text-black border-x-[3px] outline-primary border-primary' onChange={() => { }} />
@@ -47,11 +47,11 @@ export default function Profile({ userPosts, prismaUser }: {
                   <Button onClick={() => { signOut() }}>Signout </Button>
                </div>
             </div>
-            <div className='grid grid-cols-4'>
+            {/* <div className='grid grid-cols-4'>
                <div className='p-2 bg-primary text-white'>
                   <p>hello</p>
                </div>
-            </div>
+            </div> */}
          </div>
          <h2 className="font-bold text-xl self-start">Recent Posts</h2>
          <div className="grid grid-flow-row gap-6 w-full grid-cols-home">

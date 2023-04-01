@@ -14,7 +14,7 @@ module.exports = {
         bg: '#090018',
         primarybg: '#20202B',
         primary: '#7A54E7',
-        secondary: '#4522A9'
+        secondary: '#A658F4'
       },
       dropShadow: {
         'primary': '5px 5px 0 rgba(122, 84, 231, 1)',

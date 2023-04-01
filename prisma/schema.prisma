@@ -86,7 +86,7 @@ model Comment {
   userId    String
   user      User     @relation(fields: [userId], references: [id])
   postId    Int
-  posts      Post     @relation(fields: [postId], references: [id])
+  post      Post     @relation(fields: [postId], references: [id])
 }
 
 model Like {
