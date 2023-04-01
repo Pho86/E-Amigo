@@ -1,5 +1,5 @@
-# E-Amigos 
-E-Amigos is a social media web application to help you find a community and other people to game with or just to chill with. Find other people globally to enjoy creating authentic connections among our community members.
+# E-Amigo 
+E-Amigo is a social media web application to help you find a community and other people to game with or just to chill with. Find other people globally to enjoy creating authentic connections among our community members. You can visit it on [Vercel](https://eamigo.vercel.app/).
 
 ## Technology Used
 * Next Js,
@@ -24,3 +24,10 @@ E-Amigos is a social media web application to help you find a community and othe
 5. Run the server by using `yarn dev` or `npm run dev`
 
 6. Open the server by going to [http://localhost:3000](http://localhost:3000) (can open in a different link depending on if you have a server already open)
+
+### Screenshots
+
+<a href="https://eamigo.vercel.app">
+   <img src="/public/homepage.png" alt="E-Amigo Home Page">
+</a>
+
