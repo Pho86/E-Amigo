@@ -21,7 +21,6 @@ export default function Post({
 }) {
    const [comment, setComment] = useState({
       content: "",
-      id: ""
    })
    const [disabled, setDisabled] = useState(false)
    const handleChange = (event: any) => {
