@@ -88,8 +88,10 @@ export async function getServerSideProps() {
         },
         include: {
             user: true,
+            comments:true,
         }
     })
+
     // const randomUsers = await prisma.user.findMany({
 
     // })

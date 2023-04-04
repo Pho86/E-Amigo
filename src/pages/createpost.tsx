@@ -8,17 +8,26 @@ export default function CreatePost() {
         title: "",
         content: "",
         game: "",
-        tags: [""]
-    })
+        tags: []
+    } as any)
     const [disabled, setDisabled] = useState(false)
     const handleChange = (event: any) => {
         setPost({ ...post, [event.target.name]: event.target.value });
     };
+    const [chill, setChill] = useState(true)
+    const [sweaty, setSweaty] = useState(true)
+    const [cringe, setCringe] = useState(true)
+    const [fun, setFun] = useState(true)
+
     const router = useRouter();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
             setDisabled(true)
+            if (chill) post.tags.push("chill")
+            if (fun) post.tags.push("fun")
+            if (sweaty) post.tags.push("sweaty")
+            if (cringe) post.tags.push("cringe")
             const req = await axios.post('/api/post', { post });
             router.push('/')
         }
@@ -26,6 +35,23 @@ export default function CreatePost() {
             console.log(error)
         }
     }
+    const [all, setAll] = useState(true)
+    const handleAll = () => {
+        if (all) {
+            setAll(false)
+            setChill(false);
+            setFun(false);
+            setCringe(false);
+            setSweaty(false)
+        } else {
+            setAll(true)
+            setChill(true);
+            setFun(true);
+            setCringe(true);
+            setSweaty(true);
+        }
+    }
+
     return (
         <>
             <Head>
@@ -72,6 +98,15 @@ export default function CreatePost() {
                                 onChange={() => { }}
                             ></textarea>
                         </div>
+
+                        <div className='flex gap-4 justify-center'>
+                            <Tag active={all} text="all" onClick={handleAll} />
+                            <Tag active={chill} text="chill" onClick={() => { setChill(!chill); setAll(false); }} />
+                            <Tag active={fun} text="fun" onClick={() => { setFun(!fun); setAll(false) }} />
+                            <Tag active={cringe} text="cringe" onClick={() => { setCringe(!cringe); setAll(false) }} />
+                            <Tag active={sweaty} text="sweaty" onClick={() => { setSweaty(!sweaty); setAll(false) }} />
+                        </div>
+
                         <div className='flex justify-center items-center my-4'>
                             <Button type="submit">SUBMIT</Button>
                         </div>
@@ -86,6 +121,7 @@ import { GetServerSidePropsContext } from "next"
 import { authOptions } from './api/auth/[...nextauth]';
 import Button from "@/components/Button";
 import Head from "next/head";
+import Tag from "@/components/Tag";
 export async function getServerSideProps(context: GetServerSidePropsContext) {
     const session = await getServerSession(context.req, context.res, authOptions);
 
