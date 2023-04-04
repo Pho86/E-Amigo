@@ -116,6 +116,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
       include: {
          user: true,
+         comments:true,
       }
    })
    return {
