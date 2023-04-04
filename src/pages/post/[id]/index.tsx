@@ -126,27 +126,24 @@ export default function Post({
                      </AnimatePresence>
                   </div>
                </div>
-               <div className="flex gap-2 mt-2 flex-wrap">
+               <div className="flex gap-2 mt-1 mx-2 flex-wrap">
                   {post.tags.length > 0 ?
                      <> {
                         post.tags.length >= 4 ?
                            <>
-                              <Tag active={true} text={"all"} onClick={() => { }} />
                               <Tag active={true} text={"chill"} onClick={() => { }} />
                               <Tag active={true} text={"fun"} onClick={() => { }} />
                               <Tag active={true} text={"sweaty"} onClick={() => { }} />
                               <Tag active={true} text={"cringe"} onClick={() => { }} />
                            </> :
-                           post.tags.map((tag: any) => (
-                              <>
-                                 <Tag active={false} text={"all"} onClick={() => { }} />
-                                 <Tag active={true} key={tag.id} text={tag} onClick={() => { }} />
-                              </>
-                           ))
+                           <>
+                              {post.tags.map((tag: any, index: number) => (
+                                 <Tag active={true} key={index} text={tag} onClick={() => { }} />
+                              ))}
+                           </>
                      }
                      </> :
                      <>
-                        <Tag active={true} text={"all"} onClick={() => { }} />
                         <Tag active={true} text={"chill"} onClick={() => { }} />
                         <Tag active={true} text={"fun"} onClick={() => { }} />
                         <Tag active={true} text={"sweaty"} onClick={() => { }} />

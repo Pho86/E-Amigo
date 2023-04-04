@@ -2,6 +2,7 @@ import Image from "next/image"
 import React, { useEffect, useState } from "react"
 import axios from "axios"
 import { useRouter } from "next/router"
+import Tag from "@/components/Tag"
 export default function Post({
    post: initialPost,
 }: {
@@ -12,11 +13,21 @@ export default function Post({
    const handleChange = (event: any) => {
       setPost({ ...post, [event.target.name]: event.target.value });
    };
+
+   const [chill, setChill] = useState(false)
+   const [sweaty, setSweaty] = useState(false)
+   const [cringe, setCringe] = useState(false)
+   const [fun, setFun] = useState(false)
+
    const router = useRouter();
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       try {
          setDisabled(true)
+         if (chill) post.tags.push("chill")
+         if (fun) post.tags.push("fun")
+         if (sweaty) post.tags.push("sweaty")
+         if (cringe) post.tags.push("cringe")
          const req = await axios.put('/api/post/', { post });
          router.push('/')
       }
@@ -24,6 +35,32 @@ export default function Post({
          console.log(error)
       }
    }
+   const [all, setAll] = useState(false)
+   const handleAll = () => {
+      if (all) {
+         setAll(false)
+         setChill(false);
+         setFun(false);
+         setCringe(false);
+         setSweaty(false)
+      } else {
+         setAll(true)
+         setChill(true);
+         setFun(true);
+         setCringe(true);
+         setSweaty(true);
+      }
+   }
+   useEffect(() => {
+      console.log(initialPost.tags)
+      for (let i = 0; i < initialPost.tags.length; i++) {
+         if (initialPost.tags[i] === "chill") {setAll(false); setChill(true)}
+         if (initialPost.tags[i] === "fun") {setAll(false); setFun(true)}
+         if (initialPost.tags[i] === "sweaty") {setAll(false); setSweaty(true)}
+         if (initialPost.tags[i] === "cringe") {setAll(false); setCringe(true)}
+      }
+      if (fun && chill && sweaty && cringe) setAll(true) 
+   }, [])
    return (
       <>
          <Head>
@@ -68,6 +105,14 @@ export default function Post({
                         rows={5}
                         onChange={() => { }}
                      ></textarea>
+                  </div>
+
+                  <div className='flex gap-4 justify-center'>
+                     <Tag active={all} text="all" onClick={handleAll} />
+                     <Tag active={chill} text="chill" onClick={() => { setChill(!chill); setAll(false); }} />
+                     <Tag active={fun} text="fun" onClick={() => { setFun(!fun); setAll(false) }} />
+                     <Tag active={cringe} text="cringe" onClick={() => { setCringe(!cringe); setAll(false) }} />
+                     <Tag active={sweaty} text="sweaty" onClick={() => { setSweaty(!sweaty); setAll(false) }} />
                   </div>
                   <div className='flex justify-center items-center my-4'>
                      <Button type="submit">SUBMIT</Button>
