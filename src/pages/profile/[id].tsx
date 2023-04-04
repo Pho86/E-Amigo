@@ -22,7 +22,7 @@ export default function Profile({ userPosts, prismaUser }: {
          <title>{`${prismaUser.name}'s Profile | E-Amigo`}</title>
       </Head>
       <main className='flex flex-col justify-between w-full mt-12 items-center gap-5 p-4 pt-8 sm:p-8 md:p-16'>
-         <div className='flex self-start w-5/12'>
+         <div className='flex self-start w-full md:w-5/12'>
             <Image src={prismaUser.image} width={200} height={200} className="rounded-lg" alt={`profile picture for ${prismaUser.name}`} />
             <div className='flex flex-col px-4 gap-6'>
                <h1 className='font-bold text-2xl'>{prismaUser && prismaUser.name}</h1>

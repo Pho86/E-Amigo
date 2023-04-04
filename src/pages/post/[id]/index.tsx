@@ -126,6 +126,34 @@ export default function Post({
                      </AnimatePresence>
                   </div>
                </div>
+               <div className="flex gap-2 mt-2 flex-wrap">
+                  {post.tags.length > 0 ?
+                     <> {
+                        post.tags.length >= 4 ?
+                           <>
+                              <Tag active={true} text={"all"} onClick={() => { }} />
+                              <Tag active={true} text={"chill"} onClick={() => { }} />
+                              <Tag active={true} text={"fun"} onClick={() => { }} />
+                              <Tag active={true} text={"sweaty"} onClick={() => { }} />
+                              <Tag active={true} text={"cringe"} onClick={() => { }} />
+                           </> :
+                           post.tags.map((tag: any) => (
+                              <>
+                                 <Tag active={false} text={"all"} onClick={() => { }} />
+                                 <Tag active={true} key={tag.id} text={tag} onClick={() => { }} />
+                              </>
+                           ))
+                     }
+                     </> :
+                     <>
+                        <Tag active={true} text={"all"} onClick={() => { }} />
+                        <Tag active={true} text={"chill"} onClick={() => { }} />
+                        <Tag active={true} text={"fun"} onClick={() => { }} />
+                        <Tag active={true} text={"sweaty"} onClick={() => { }} />
+                        <Tag active={true} text={"cringe"} onClick={() => { }} />
+                     </>
+                  }
+               </div>
                <hr className="my-2 mx-1 border-indigo-300" />
                <p className="p-1 m-1 rounded bg-primary">{post.game}</p>
                <hr className="my-2 mx-1 border-indigo-300" />
@@ -196,6 +224,7 @@ import { getServerSession } from "next-auth"
 import { authOptions } from "@/pages/api/auth/[...nextauth]"
 import Link from "next/link"
 import Head from "next/head"
+import Tag from "@/components/Tag"
 export async function getServerSideProps(context: any) {
    const { id } = context.query
    const prismapost = await prisma.post.findFirstOrThrow({
@@ -220,7 +249,7 @@ export async function getServerSideProps(context: any) {
    })
    let user;
    let liked = {}
-   let active 
+   let active
    const session = await getServerSession(context.req, context.res, authOptions);
    if (session) {
       user = await prisma.user.findUnique({
