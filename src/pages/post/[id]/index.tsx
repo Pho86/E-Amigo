@@ -152,7 +152,7 @@ export default function Post({
                   }
                </div>
                <hr className="my-2 mx-1 border-indigo-300" />
-               <p className="p-1 m-1 rounded bg-primary">{post.game}</p>
+               <p className="p-1 px-2 m-1 rounded bg-primary">{post.game}</p>
                <hr className="my-2 mx-1 border-indigo-300" />
                <p>{post.content}</p>
             </div>

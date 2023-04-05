@@ -22,7 +22,7 @@ export default function Home({
     return (
         <>
             <Head>
-                <title>E-Amigo | Gaming With Friends</title>
+                <title>E-Amigo | Find other gaming Amigos online!</title>
             </Head>
 
             <main className="mt-24 flex-col flex justify-center w-full items-center p-4 pt-8 sm:p-8 md:p-16 gap-6">
@@ -63,13 +63,13 @@ export default function Home({
                             <FaPlusCircle className="text-3xl hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all" />
                         </Link>
                     </div>
-                    <div className="grid gap-6 my-4 md:grid-cols-4 grid-cols-2 place-items-center">
-                        <Card text="chill" active={chill} onClick={() => { setChill(!chill); setSweaty(false); setFun(false); setCringe(false) }} src="/love.png"/>
-                        <Card text="fun" active={fun} onClick={() => { setFun(!fun); setSweaty(false); setChill(false); setCringe(false) }} src="/peach.gif"/>
-                        <Card text="sweaty" active={sweaty} onClick={() => { setSweaty(!sweaty); setChill(false); setFun(false); setCringe(false) }} src="/typing.gif"/>
-                        <Card text="cringe" active={cringe} onClick={() => { setCringe(!cringe); setSweaty(false); setFun(false); setChill(false) }} src="/sweat.gif"/>
-                    </div>
-                    <m.div className="mt-5 grid grid-flow-row gap-6 w-full grid-cols-home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: .5 }}>
+                    <m.div className="grid gap-6 my-4 md:grid-cols-4 grid-cols-2 place-items-center" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: .5 }}>
+                        <Card text="chill" active={chill} onClick={() => { setChill(!chill); setSweaty(false); setFun(false); setCringe(false) }} src="/love.png" />
+                        <Card text="fun" active={fun} onClick={() => { setFun(!fun); setSweaty(false); setChill(false); setCringe(false) }} src="/peach.gif" />
+                        <Card text="sweaty" active={sweaty} onClick={() => { setSweaty(!sweaty); setChill(false); setFun(false); setCringe(false) }} src="/typing.gif" />
+                        <Card text="cringe" active={cringe} onClick={() => { setCringe(!cringe); setSweaty(false); setFun(false); setChill(false) }} src="/sweat.gif" />
+                    </m.div>
+                    <m.div className="mt-5  grid grid-flow-row gap-6 w-full grid-cols-home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: .8 }}>
                         {chill && posts.map((post: any, i: number) => {
                             for (let i = 0; i < post.tags.length; i++) {
                                 if (post.tags[i] === "chill") {
@@ -105,7 +105,7 @@ export default function Home({
                         }
                     </m.div>
                 </section>
-                <section className="my-8 flex flex-col gap-5">
+                <section className="my-8 flex flex-col gap-5 mb-12">
                     <h2 className="font-bold text-xl">Login or check your E-Amigo profile</h2>
                     <div className="flex">
                         <Link href="/profile" className="w-full px-4">

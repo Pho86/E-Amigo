@@ -25,8 +25,7 @@ export default function Post({
    post: postProps
 }) {
    return (
-      <div className="flex flex-col p-4 bg-primarybg h-max text-slate-50 rounded-xl transition-all duration-150 drop-shadow-small hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]">
-
+      <div className="flex flex-col p-4 bg-primarybg h-max text-slate-50 rounded transition-all duration-150 drop-shadow-small hover:drop-shadow-primary hover:-translate-x-[5px] hover:-translate-y-[5px]">
          <Link href={`/post/${post.id}`}>
             <div className="flex flex-col">
                <div className="flex justify-between">

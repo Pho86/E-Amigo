@@ -20,7 +20,7 @@ export default function Card({
         <div className={twMerge("p-3 flex justify-between w-full font-bold text-xl px-4 rounded cursor-pointer bg-primary hover:bg-primarydark transition-all " + (active ? "bg-primarydark hover:bg-primary drop-shadow-primary-sm -translate-x-[2px] -translate-y-[2px] " : ""))} onClick={onClick}>
             <p>{text} </p>
             <div className="-my-6">
-                <Image src={src} width={width} height={height} alt="tag icon" className={twMerge(" " + (active ? "grayscale-0 " : "grayscale-[80%]"))} />
+                <Image src={src} width={width} height={height} alt="tag icon" className={twMerge("drop-shadow-[3px_3px_0px_rgba(166,88,244,1)] " + (active ? "grayscale-0 " : "grayscale-[85%]"))} />
             </div>
         </div>
     )
