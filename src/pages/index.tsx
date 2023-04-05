@@ -1,5 +1,5 @@
 import Post from "@/components/Post"
-import React, { Suspense } from 'react';
+import React, { Suspense, useState } from 'react';
 import { m } from "framer-motion"
 import { Link as Scroll } from "react-scroll"
 import Button from "@/components/Button"
@@ -14,6 +14,11 @@ export default function Home({
     posts: postProps,
     randomUsers: any
 }) {
+    const [chill, setChill] = useState(false)
+    const [sweaty, setSweaty] = useState(false)
+    const [cringe, setCringe] = useState(false)
+    const [fun, setFun] = useState(false)
+
     return (
         <>
             <Head>
@@ -50,7 +55,6 @@ export default function Home({
                             <Spline scene="https://prod.spline.design/OFVNpul-5fMB04Hx/scene.splinecode" />
                         </m.div>
                     </Suspense>
-
                 </div>
                 <section id="posts" className="w-full mb-10 z-50">
                     <div className="flex justify-between">
@@ -59,10 +63,46 @@ export default function Home({
                             <FaPlusCircle className="text-3xl hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all" />
                         </Link>
                     </div>
+                    <div className="grid gap-6 my-4 md:grid-cols-4 grid-cols-2 place-items-center">
+                        <Card text="chill" active={chill} onClick={() => { setChill(!chill); setSweaty(false); setFun(false); setCringe(false) }} />
+                        <Card text="fun" active={fun} onClick={() => { setFun(!fun); setSweaty(false); setChill(false); setCringe(false) }} />
+                        <Card text="sweaty" active={sweaty} onClick={() => { setSweaty(!sweaty); setChill(false); setFun(false); setCringe(false) }} />
+                        <Card text="cringe" active={cringe} onClick={() => { setCringe(!cringe); setSweaty(false); setFun(false); setChill(false) }} />
+                    </div>
                     <m.div className="mt-5 grid grid-flow-row gap-6 w-full grid-cols-home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: .5 }}>
-                        {posts && posts.map((post: any, i: number) => (
-                            <Post post={post} key={i} />
-                        ))}
+                        {chill && posts.map((post: any, i: number) => {
+                            for (let i = 0; i < post.tags.length; i++) {
+                                if (post.tags[i] === "chill") {
+                                    return <Post post={post} key={i} />
+                                }
+                            }
+                        })}
+                        {fun && posts.map((post: any, i: number) => {
+                            for (let i = 0; i < post.tags.length; i++) {
+                                if (post.tags[i] === "fun") {
+                                    return <Post post={post} key={i} />
+                                }
+                            }
+                        })}
+                        {cringe && posts.map((post: any, i: number) => {
+                            for (let i = 0; i < post.tags.length; i++) {
+                                if (post.tags[i] === "cringe") {
+                                    return <Post post={post} key={i} />
+                                }
+                            }
+                        })}
+                        {sweaty && posts.map((post: any, i: number) => {
+                            for (let i = 0; i < post.tags.length; i++) {
+                                if (post.tags[i] === "sweaty") {
+                                    return <Post post={post} key={i} />
+                                }
+                            }
+                        })}
+                        {!chill && !fun && !cringe && !sweaty &&
+                            posts.map((post: any, i: number) => (
+                                <Post post={post} key={i} />
+                            ))
+                        }
                     </m.div>
                 </section>
                 <section className="my-8 flex flex-col gap-5">
@@ -81,6 +121,7 @@ export default function Home({
 import { prisma } from "server/db/client"
 import { FaPlusCircle } from "react-icons/fa";
 import Head from "next/head";
+import Card from "@/components/Cards";
 export async function getServerSideProps() {
     const posts = await prisma?.post.findMany({
         orderBy: {
@@ -88,7 +129,7 @@ export async function getServerSideProps() {
         },
         include: {
             user: true,
-            comments:true,
+            comments: true,
         }
     })
 
