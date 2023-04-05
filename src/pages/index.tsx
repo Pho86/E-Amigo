@@ -64,10 +64,10 @@ export default function Home({
                         </Link>
                     </div>
                     <div className="grid gap-6 my-4 md:grid-cols-4 grid-cols-2 place-items-center">
-                        <Card text="chill" active={chill} onClick={() => { setChill(!chill); setSweaty(false); setFun(false); setCringe(false) }} />
-                        <Card text="fun" active={fun} onClick={() => { setFun(!fun); setSweaty(false); setChill(false); setCringe(false) }} />
-                        <Card text="sweaty" active={sweaty} onClick={() => { setSweaty(!sweaty); setChill(false); setFun(false); setCringe(false) }} />
-                        <Card text="cringe" active={cringe} onClick={() => { setCringe(!cringe); setSweaty(false); setFun(false); setChill(false) }} />
+                        <Card text="chill" active={chill} onClick={() => { setChill(!chill); setSweaty(false); setFun(false); setCringe(false) }} src="/love.png"/>
+                        <Card text="fun" active={fun} onClick={() => { setFun(!fun); setSweaty(false); setChill(false); setCringe(false) }} src="/peach.gif"/>
+                        <Card text="sweaty" active={sweaty} onClick={() => { setSweaty(!sweaty); setChill(false); setFun(false); setCringe(false) }} src="/typing.gif"/>
+                        <Card text="cringe" active={cringe} onClick={() => { setCringe(!cringe); setSweaty(false); setFun(false); setChill(false) }} src="/sweat.gif"/>
                     </div>
                     <m.div className="mt-5 grid grid-flow-row gap-6 w-full grid-cols-home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2, delay: .5 }}>
                         {chill && posts.map((post: any, i: number) => {
