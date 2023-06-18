@@ -25,7 +25,6 @@ export default function Post({
    const [disabled, setDisabled] = useState(false)
    const handleChange = (event: any) => {
       setComment({ ...comment, [event.target.name]: event.target.value });
-      console.log(comments)
    };
    const [comments, setComments] = useState(initialcomments)
    const router = useRouter()
@@ -75,14 +74,13 @@ export default function Post({
    const [likes, setLikes] = useState(post.totalLikes)
    const [canLike, setCanLike] = useState(active)
    const [expand, setExpand] = useState(false)
-
    return (
       <>
          <Head>
             <title>{`${post.title} | E-Amigo`}</title>
          </Head>
          <div className="flex flex-col mt-16 p-10 gap-5 justify-between items-center">
-            <div className="w-full md:w-1/2">
+            <div className="w-full lg:w-1/2">
                <div className="flex justify-between">
                   <div className="flex">
                      <Link href={`/profile/${post.user.id}`} className="flex">
@@ -156,7 +154,7 @@ export default function Post({
                <hr className="my-2 mx-1 border-indigo-300" />
                <p>{post.content}</p>
             </div>
-            <div className="w-full md:w-1/2 flex flex-col gap-5">
+            <div className="w-full lg:w-1/2 flex flex-col gap-5">
                {user.id ? <form onSubmit={handleSubmit} onChange={handleChange}>
                   <fieldset disabled={disabled}>
                      <div className='flex gap-2 justify-center flex-col'>
@@ -205,7 +203,7 @@ export default function Post({
                   </form>}
                <div className="flex flex-col gap-10">
                   {comments?.map((comment: any) => (
-                     <Comment comment={comment} key={comment.id} onChange={(e: any) => { deleteComment(e); post.totalComments -= 1 }} owner={comment.user.id === user.id} />
+                     <Comment comment={comment} id={`comment${comment.id}`} key={comment.id} onChange={(e: any) => { deleteComment(e); post.totalComments -= 1 }} owner={comment.user.id === user.id} />
                   ))}
                </div>
             </div>

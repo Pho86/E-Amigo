@@ -18,11 +18,13 @@ export interface commentProps {
 export default function Comment({
    comment,
    onChange = (comment: commentProps) => { return comment },
-   owner = false
+   owner = false,
+   id,
 }: {
    comment: commentProps,
    onChange: any,
-   owner: boolean
+   owner: boolean,
+   id: string,
 }) {
    const [disabled, setDisabled] = useState(false)
    const [edit, setEdit] = useState(false)
@@ -51,7 +53,7 @@ export default function Comment({
    }
 
    return (
-      <div className="flex flex-col">
+      <div className="flex flex-col" id={id}>
          <div className="flex items-center w-full justify-between">
             <div className="flex">
                <Link href={`/profile/${comment.user.id}`} className="flex">
