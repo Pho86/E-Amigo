@@ -29,7 +29,7 @@ export default function NavBar({
             <Link href="/createpost" className="hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all place-self-center md:block hidden">
                <FaPlusCircle size={30} />
             </Link>
-            <Link href="/profile" className="place-self-end ">
+            <Link href="/profile" className="place-self-end self-center">
                {user ?
                   <Image
                      className="rounded hover:drop-shadow-primary-sm hover:-translate-x-[2px] hover:-translate-y-[2px] transition-all"

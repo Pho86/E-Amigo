@@ -1,6 +1,6 @@
 
 describe('create post, leads to login because test has no account', () => {
-  it('should navigate to the about page', () => {
+  it('should navigate to the signin page', () => {
     // Start from the index page
     cy.visit('http://localhost:3000/')
     cy.wait(1000)
@@ -10,7 +10,7 @@ describe('create post, leads to login because test has no account', () => {
 })
 
 describe('click the post number 20, make sure it redirects to the post, and find a comment, click the comment and make sure it paths to correct user', () => {
-  it('should navigate to the about page', () => {
+  it('should navigate to the certain user profile, after a series of tasks', () => {
     // Start from the index page
     cy.visit('http://localhost:3000/')
     cy.wait(1000)
@@ -24,5 +24,14 @@ describe('click the post number 20, make sure it redirects to the post, and find
   })
 })
 
+describe('press the navbar ', () => {
+  it('should navigate to the about page', () => {
+    // Start from the index page
+    cy.visit('http://localhost:3000/')
+    cy.wait(1000)
+    cy.get('a[href*="createpost"]').first().click()
+    cy.url().should('include', '/api/auth/signin')
+  })
+})
 
 export { }
