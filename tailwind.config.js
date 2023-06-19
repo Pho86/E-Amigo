@@ -14,7 +14,7 @@ module.exports = {
         bg: '#0B0019',
         primarybg: '#1D1A22',
         primary: '#7A54E7',
-        topbg:'#11002C',
+        topbg:'#14002E',
         secondary: '#A658F4',
         primarydark: '#6129FF',
 
