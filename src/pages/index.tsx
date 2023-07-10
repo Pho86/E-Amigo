@@ -12,10 +12,8 @@ import Card from "@/components/Cards";
 import ButtonSection from "@/components/ButtonSection";
 export default function Home({
     posts,
-    randomUsers,
 }: {
-    posts: postProps,
-    randomUsers: any
+    posts: postProps
 }) {
     const [chill, setChill] = useState(false)
     const [sweaty, setSweaty] = useState(false)
@@ -146,15 +144,9 @@ export async function getServerSideProps() {
             comments: true,
         }
     })
-
-    // const randomUsers = await prisma.user.findMany({
-
-    // })
-    // console.log(randomUsers)
     return {
         props: {
             posts: JSON.parse(JSON.stringify(posts)),
-            // randomUsers: JSON.parse(JSON.stringify(randomUsers))
         }
     }
 }
