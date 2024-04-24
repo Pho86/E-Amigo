@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Accordion = ({ i, expanded, setExpanded, title, description }: {
+export function Accordion ({ i, expanded, setExpanded, title, description }: {
   i: any,
   expanded: any,
   setExpanded: any,
   title: any,
   description: any,
-}) => {
+}) {
   const isOpen = i === expanded;
 
   return (

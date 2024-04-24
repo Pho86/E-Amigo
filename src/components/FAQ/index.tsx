@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Accordion from '../Accordion';
-
-const FAQ = () => {
+import { m } from "framer-motion"
+export function FAQ() {
     const [expanded, setExpanded] = useState<boolean>(false);
 
     const accordionIds1 = [
@@ -27,7 +27,20 @@ const FAQ = () => {
     ];
 
     return (
-        <section className='w-full flex flex-col px-8 md:px-16 py-2 gap-4'>
+        <m.section className='w-full flex flex-col px-8 md:px-16 py-2 gap-4'
+            initial={{
+                opacity: 0,
+                y: 20,
+            }}
+            whileInView={{
+                opacity: 1,
+                y: [20, -5, 0],
+            }}
+            transition={{
+                duration: 0.5,
+                ease: [0.4, 0.0, 0.2, 1],
+            }}
+        >
             <h2 className="text-secondary font-semibold text-2xl md:text-3xl text-center">Frequently Asked Questions</h2>
             <div className="grid md:grid-cols-2 gap-4 md:gap-10 mt-5">
                 <div className='space-y-4'>
@@ -55,7 +68,7 @@ const FAQ = () => {
                     ))}
                 </div>
             </div>
-        </section>
+        </m.section>
     );
 };
 
