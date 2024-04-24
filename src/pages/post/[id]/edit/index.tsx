@@ -8,16 +8,16 @@ export default function Post({
 }: {
    post: any,
 }) {
-   const [disabled, setDisabled] = useState(false)
+   const [disabled, setDisabled] = useState<boolean>(false)
    const [post, setPost] = useState(initialPost)
    const handleChange = (event: any) => {
       setPost({ ...post, [event.target.name]: event.target.value });
    };
 
-   const [chill, setChill] = useState(false)
-   const [sweaty, setSweaty] = useState(false)
-   const [cringe, setCringe] = useState(false)
-   const [fun, setFun] = useState(false)
+   const [chill, setChill] = useState<boolean>(false)
+   const [sweaty, setSweaty] = useState<boolean>(false)
+   const [cringe, setCringe] = useState<boolean>(false)
+   const [fun, setFun] = useState<boolean>(false)
 
    const router = useRouter();
    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

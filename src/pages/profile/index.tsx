@@ -36,7 +36,7 @@ export default function Profile({ userPosts, prismaUser }: {
          alert("not a valid discord tag")
       }
    }
-   const [edit, setEdit] = useState(false)
+   const [edit, setEdit] = useState<boolean>(false)
    const { data: session } = useSession();
    if (session) {
       return <>
@@ -79,6 +79,7 @@ export default function Profile({ userPosts, prismaUser }: {
                   ))}
                </div>
             </section>
+            <Footer/>
          </main>
       </>
    }
@@ -97,6 +98,7 @@ import { GetServerSidePropsContext } from "next"
 import Button from '@/components/Button';
 import { prisma } from 'server/db/client';
 import Head from 'next/head';
+import Footer from '@/components/Footer';
 export async function getServerSideProps(context: GetServerSidePropsContext) {
    const session = await getServerSession(context.req, context.res, authOptions);
    if (!session) {

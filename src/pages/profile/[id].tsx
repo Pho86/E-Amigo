@@ -9,7 +9,7 @@ export default function Profile({ userPosts, prismaUser }: {
    userPosts: any
    prismaUser: any
 }) {
-   const [copied, setCopied] = useState(false)
+   const [copied, setCopied] = useState<boolean>(false)
    const CopyDiscord = async () => {
       navigator.clipboard.writeText(prismaUser.discord)
       setCopied(true)
@@ -38,6 +38,7 @@ export default function Profile({ userPosts, prismaUser }: {
                ))}
             </div>
          </section>
+         <Footer/>
       </main>
 
    </>
@@ -48,6 +49,7 @@ import { GetServerSidePropsContext } from "next"
 import { prisma } from 'server/db/client';
 import { useState } from 'react';
 import Head from 'next/head';
+import Footer from '@/components/Footer';
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
    const { id } = context.query

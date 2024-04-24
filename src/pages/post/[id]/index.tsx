@@ -92,39 +92,16 @@ export default function Post({
                            alt={`${post.user.name} profile picture`}
                         />
                         <div className="flex flex-col p-2 h-full justify-between">
+                           <div className="flex gap-8">
                            <h2 className="">{post.user?.name}</h2>
+                           <p className="text-sm">{formatTimeAgo(post.createdAt)}</p>
+                           </div>
                            <h1 className="font-bold text-xl">{post.title}</h1>
                         </div>
                      </Link>
                   </div>
                   <div className="flex flex-col items-end justify-between gap-1 h-auto p-2">
-                     <p>{formatTimeAgo(post.createdAt)}</p>
-
-                     {canLike ? <div onClick={() => { handleLike(false) }} className="flex cursor-pointer gap-1">
-                        <FaHeart className="text-primary" />
-                        <p>{likes}</p>
-                     </div> : <div onClick={() => { handleLike(true) }} className="flex cursor-pointer gap-1">
-                        <FaHeart />
-                        <p>{likes}</p>
-                     </div>
-                     }
-
-                     {post.user.id === user.id && <FaEllipsisV onClick={() => { setExpand(!expand) }} />}
-                     <AnimatePresence>
-                        {expand &&
-                           <m.div className="flex flex-col absolute p-2 border rounded bg-bg -translate-y-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                              <ul>
-                                 <Link href={`/post/${id}/edit`}>
-                                    <li className="cursor-pointer hover:bg-indigo-900 p-1">Edit Post</li>
-                                 </Link>
-                                 <li className="cursor-pointer hover:bg-indigo-900 p-1" onClick={handleDelete}>Delete Post</li>
-                              </ul>
-                           </m.div>
-                        }
-                     </AnimatePresence>
-                  </div>
-               </div>
-               <div className="flex gap-2 mt-2 mx-2 flex-wrap">
+                  <div className="flex gap-2 flex-wrap">
                   {post.tags.length > 0 ?
                      <> {
                         post.tags.length >= 4 ?
@@ -149,6 +126,31 @@ export default function Post({
                      </>
                   }
                </div>
+                     {canLike ? <div onClick={() => { handleLike(false) }} className="flex cursor-pointer gap-1">
+                        <FaHeart className="text-primary" />
+                        <p>{likes}</p>
+                     </div> : <div onClick={() => { handleLike(true) }} className="flex cursor-pointer gap-1">
+                        <FaHeart />
+                        <p>{likes}</p>
+                     </div>
+                     }
+
+                     {post.user.id === user.id && <FaEllipsisV onClick={() => { setExpand(!expand) }} />}
+                     <AnimatePresence>
+                        {expand &&
+                           <m.div className="flex flex-col absolute p-2 border rounded bg-bg -translate-y-8" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                              <ul>
+                                 <Link href={`/post/${id}/edit`}>
+                                    <li className="cursor-pointer hover:bg-indigo-900 p-1">Edit Post</li>
+                                 </Link>
+                                 <li className="cursor-pointer hover:bg-indigo-900 p-1" onClick={handleDelete}>Delete Post</li>
+                              </ul>
+                           </m.div>
+                        }
+                     </AnimatePresence>
+                  </div>
+               </div>
+               
                <hr className="my-2 mx-1 border-indigo-300" />
                <p className="p-1 px-2 m-1 rounded bg-primary">{post.game}</p>
                <hr className="my-2 mx-1 border-indigo-300" />

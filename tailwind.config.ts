@@ -1,4 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+
+const defaultTheme = require("tailwindcss/defaultTheme");
+const colors = require("tailwindcss/colors");
+const {
+  default: flattenColorPalette,
+} = require("tailwindcss/lib/util/flattenColorPalette");
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
@@ -11,10 +18,10 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bg: '#0B0019',
-        primarybg: '#1D1A22',
+        bg: '#1E1B21',
+        primarybg: '#312C39',
         primary: '#7A54E7',
-        topbg:'#14002E',
+        topbg:'#292628',
         secondary: '#A658F4',
         primarydark: '#6129FF',
 
@@ -26,12 +33,24 @@ module.exports = {
         'primary-special': [
           '8px 6px 0 rgba(75, 212, 250, 1)',
           '6px 6px 0 rgba(0, 0, 0, 1)',
-        ]
+        ],
+        'small': '0px 0px 0px rgba(0, 0, 0, 1)'
       },
       gridTemplateColumns:{
         'home': 'repeat(auto-fit, minmax(370px,3fr));'
       }
     },
   },
-  plugins: [],
+  plugins: [addVariablesForColors,],
+}
+
+function addVariablesForColors({ addBase, theme }: any) {
+  let allColors = flattenColorPalette(theme("colors"));
+  let newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+ 
+  addBase({
+    ":root": newVars,
+  });
 }

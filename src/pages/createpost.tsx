@@ -10,14 +10,14 @@ export default function CreatePost() {
         game: "",
         tags: []
     } as any)
-    const [disabled, setDisabled] = useState(false)
+    const [disabled, setDisabled] = useState<boolean>(false)
     const handleChange = (event: any) => {
         setPost({ ...post, [event.target.name]: event.target.value });
     };
-    const [chill, setChill] = useState(true)
-    const [sweaty, setSweaty] = useState(true)
-    const [cringe, setCringe] = useState(true)
-    const [fun, setFun] = useState(true)
+    const [chill, setChill] = useState<boolean>(true)
+    const [sweaty, setSweaty] = useState<boolean>(true)
+    const [cringe, setCringe] = useState<boolean>(true)
+    const [fun, setFun] = useState<boolean>(true)
 
     const router = useRouter();
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
