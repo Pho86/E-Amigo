@@ -41,10 +41,10 @@ export default function Home({
                         }}
                         className="text-2xl px-4 md:text-6xl lg:text-7xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
                     >
-                        Find Amigos Today for Tommorrow
+                        Find <span className='text-primary'>Amigos</span> Today for Tommorrow
                     </m.h1>
                     <div
-                        className="max-w-lg items-center"
+                        className="max-w-xl items-center"
                     >
                         <m.div className=""
                             initial={{
@@ -62,14 +62,14 @@ export default function Home({
                             }}
                         >
                             <p className="mt-4 font-normal text-base text-neutral-300 text-center mx-auto">
-                                Find other Amigos to game with for today and tomorrow with E-Amigo and create a community with the other amigos. Become a part of the Amigos today for tommorrow.
+                                Find other Amigos to game with for today and tomorrow with E-Amigo and create a community with the other amigos. Become a part of the Amigos today, so you can find other Amigos for tommorrow.
                             </p>
                         </m.div>
                         <Link href="/posts" >
                             <m.div initial={{
                                 opacity: 0,
                                 y: 20,
-                            }} 
+                            }}
                                 whileInView={{
                                     opacity: 1,
                                     y: [20, -5, 0],
@@ -80,7 +80,7 @@ export default function Home({
                                     delay: 0.6
                                 }}
                                 className="pt-5"
-                                >
+                            >
                                 <Button >Go To Posts</Button>
                             </m.div>
                         </Link >
@@ -88,8 +88,8 @@ export default function Home({
                 </HeroBanner>
                 <Grid />
 
-                    <FAQ />
-            
+                <FAQ />
+
                 <section className="bg-topbg w-full flex items-center py-12 justify-center">
                     <div className="flex flex-col items-center text-center gap-4 max-w-5xl text-balance text-lg md:text-xl leading-normal ">
                         <m.h2 className="text-secondary font-semibold text-2xl md:text-3xl"

@@ -27,7 +27,7 @@ export function FAQ() {
     ];
 
     return (
-        <m.section className='w-full flex flex-col px-8 md:px-16 py-2 gap-4'
+        <m.section className='w-full flex flex-col px-4 max-w-screen-2xl py-2 gap-4'
             initial={{
                 opacity: 0,
                 y: 20,

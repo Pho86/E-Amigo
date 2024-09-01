@@ -68,7 +68,7 @@ export default function Post({
          </Head>
          <div className="mt-16 w-full flex flex-col justify-between items-center p-4 sm:p-8 md:p-16">
             <h1 className="font-bold text-2xl mb-4">Edit Your Posting</h1>
-            <form onSubmit={handleSubmit} onChange={handleChange} className="w-full lg:w-8/12">
+            <form onSubmit={handleSubmit} onChange={handleChange} className="w-full px-4 max-w-screen-xl">
                <fieldset disabled={disabled} className="flex flex-col gap-3">
                   <div className='flex gap-2 justify-center flex-col'>
                      <label htmlFor="title">enter title</label>

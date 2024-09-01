@@ -26,7 +26,7 @@ export default function Posts({
             </Head>
 
             <main className="flex-col flex justify-center w-full items-center gap-6">
-                <section id="posts" className="w-full p-4 sm:p-8 md:p-16 md:pt-4 mb-5 z-50">
+                <section id="posts" className="w-full px-4 max-w-screen-2xl md:pt-4 mb-5 z-50">
                     <div className="flex justify-between">
                         <h1 className="font-bold text-2xl self-start mt-20">Recent Posts</h1>
                         <Link href="/createpost">
@@ -39,7 +39,7 @@ export default function Posts({
                         <Card text="sweaty" active={sweaty} onClick={() => { setSweaty(!sweaty); setChill(false); setFun(false); setCringe(false) }} src="/typing.gif" srcIn="/typing.svg" />
                         <Card text="cringe" active={cringe} onClick={() => { setCringe(!cringe); setSweaty(false); setFun(false); setChill(false) }} src="/sweat.gif" srcIn="/sweat.svg" />
                     </m.div>
-                    <div className="mt-5  grid grid-flow-row gap-6 w-full" >
+                    <div className="mt-5 grid grid-flow-row gap-6 w-full" >
                         {chill && posts.map((post: any, i: number) => {
                             for (let i = 0; i < post.tags.length; i++) {
                                 if (post.tags[i] === "chill") {

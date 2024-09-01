@@ -23,7 +23,7 @@ function Card({
 }
 export default function Grid() {
     return (
-        <section className="w-full flex flex-col px-8 md:px-16 py-2 ">
+        <section className="w-full flex flex-col px-4 max-w-screen-2xl py-2 ">
 
             <m.div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-4"
                 initial={{

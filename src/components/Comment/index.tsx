@@ -63,6 +63,10 @@ export default function Comment({
                      width={50}
                      height={50}
                      alt="comment user image"
+                     onError={(e: any) => {
+                        e.target.onerror = null;
+                        e.target.src = '/placeholder.png';
+                     }}
                   />
                   <h3 className="p-2 font-semibold text-lg">{comment.user.name}</h3>
                </Link>

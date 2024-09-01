@@ -41,12 +41,15 @@ export default function Post({
                         width={100}
                         height={100}
                         alt={`${post.user.name} profile picture`}
+                        onError={(e:any) => {
+                           e.target.onerror = null; 
+                           e.target.src = '/placeholder.png'; 
+                         }}
                      />
                      <div className="flex flex-col h-full px-2">
                         <h2 className="font-semibold text-lg">{post.user?.name}</h2>
                         <p className="whitespace-nowrap text-sm">{formatTimeAgo(post.createdAt)} </p>
                      </div>
-                     {/* <p className="whitespace-nowrap flex">{post.game}</p> */}
                   </div>
                   <div className="flex flex-col gap-1 items-end">
                      <div className="gap-2 flex flex-wrap">

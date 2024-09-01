@@ -80,7 +80,7 @@ export default function Post({
             <title>{`${post.title} | E-Amigo`}</title>
          </Head>
          <div className="flex flex-col mt-16 p-10 gap-5 justify-between items-center">
-            <div className="w-full lg:w-1/2">
+            <div className="w-full px-4 max-w-screen-xl">
                <div className="flex justify-between">
                   <div className="flex">
                      <Link href={`/profile/${post.user.id}`} className="flex">
@@ -156,7 +156,7 @@ export default function Post({
                <hr className="my-2 mx-1 border-indigo-300" />
                <p>{post.content}</p>
             </div>
-            <div className="w-full lg:w-1/2 flex flex-col gap-5">
+            <div className="w-full px-4 max-w-screen-xl flex flex-col gap-5">
                {user.id ? <form onSubmit={handleSubmit} onChange={handleChange}>
                   <fieldset disabled={disabled}>
                      <div className='flex gap-2 justify-center flex-col'>

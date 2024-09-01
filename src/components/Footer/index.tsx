@@ -2,8 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 export default function Footer() {
     return (
-        <footer className="w-full my-2 ">
-            <div className="px-8 md:px-16 my-8">
+        <footer className="w-full my-2 flex justify-center ">
+            <div className="px-4 max-w-screen-2xl my-8 w-full">
                 <div className="lg:flex lg:items-end lg:justify-between">
                     <div className="flex flex-col text-center lg:text-left">
                         <div className="flex justify-center lg:justify-start">
@@ -17,7 +17,7 @@ export default function Footer() {
                         <p className="mt-6 text-pretty">E-Amigo is a community designed to connect gamers globally.</p>
                     </div>
                     <ul className="md:mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:justify-end lg:gap-12">
-                        <Link href="/home" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">
+                        <Link href="/" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">
                             <h2>Home</h2>
                         </Link>
                         <Link href="/posts" className="font-bold text-lg p-2 hover:drop-shadow-primary-sm hover:-translate-x-[1px] hover:-translate-y-[1px] transition-all hidden md:flex">

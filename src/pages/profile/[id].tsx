@@ -22,8 +22,11 @@ export default function Profile({ userPosts, prismaUser }: {
          <title>{`${prismaUser.name}'s Profile | E-Amigo`}</title>
       </Head>
       <main className='flex flex-col justify-between '>
-         <section className='bg-topbg flex self-start flex-col gap-2 w-full sm:flex-row mt-12 items-center p-4 pt-8 sm:p-8 md:p-16'>
-            <Image src={prismaUser.image} width={200} height={200} className="rounded-lg" alt={`profile picture for ${prismaUser.name}`} />
+         <section className='bg-topbg flex self-start flex-col gap-2 w-full sm:flex-row mt-12 items-center px-4 max-w-screen-2xl p-4 pt-8 sm:p-8 md:p-16'>
+            <Image src={prismaUser.image} width={200} height={200} className="rounded-lg" alt={`profile picture for ${prismaUser.name}`} onError={(e: any) => {
+               e.target.onerror = null;
+               e.target.src = '/placeholder.png';
+            }} />
             <div className='flex flex-col px-4 gap-6'>
                <h1 className='font-bold text-2xl'>{prismaUser && prismaUser.name}</h1>
                {copied ? <p className='flex justify-between gap-6 cursor-pointer' onClick={CopyDiscord}><span className='flex gap-2 items-center'> <FaDiscord />copied</span> <FaCopy /></p> : <p className='flex justify-between gap-6 cursor-pointer' onClick={CopyDiscord}><span className='flex gap-2 items-center'> <FaDiscord />{prismaUser.discord ? prismaUser.discord : "no discord"}</span> <FaCopy /></p>}
@@ -38,7 +41,7 @@ export default function Profile({ userPosts, prismaUser }: {
                ))}
             </div>
          </section>
-         <Footer/>
+         <Footer />
       </main>
 
    </>
